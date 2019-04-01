@@ -1,0 +1,23 @@
+Metadata-Version: 1.1
+Name: python-masscan
+Version: 0.1.2
+Summary: This is a python class to use masscan and access scan results from python2
+Home-page: https://github.com/MyKings/python-masscan
+Author: MyKings (xsseroot@gmail.com)
+Author-email: xsseroot@gmail.com
+License: LICENSE
+Description: UNKNOWN
+Keywords: masscan,portscanner
+Platform: Operating System :: OS Independent
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: System :: Monitoring
+Classifier: Topic :: System :: Networking
+Classifier: Topic :: System :: Networking :: Firewalls
+Classifier: Topic :: System :: Networking :: Monitoring

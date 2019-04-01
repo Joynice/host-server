@@ -1,0 +1,84 @@
+2019-03-26 18:56:57,676 ERROR 8452 12424 D:\events\host-server\WebServer\Cms.py 181 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000234BE5739E8>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-03-26 18:56:57,677 ERROR 8452 12424 D:\events\host-server\WebServer\Cms.py 181 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+string indices must be integers
+
+2019-03-29 12:49:39,827 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:s
+string indices must be integers
+
+2019-03-29 12:49:39,828 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:/
+string indices must be integers
+
+2019-03-29 12:49:39,828 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:o
+string indices must be integers
+
+2019-03-29 12:49:39,829 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:.
+string indices must be integers
+
+2019-03-29 12:49:39,829 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:h
+string indices must be integers
+
+2019-03-29 12:49:39,830 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:t
+string indices must be integers
+
+2019-03-29 12:49:39,830 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:.
+string indices must be integers
+
+2019-03-29 12:49:39,831 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:b
+string indices must be integers
+
+2019-03-29 12:49:39,831 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:p
+string indices must be integers
+
+2019-03-29 12:49:39,832 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:u
+string indices must be integers
+
+2019-03-29 12:49:39,832 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:/
+string indices must be integers
+
+2019-03-29 12:49:39,833 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL::
+string indices must be integers
+
+2019-03-29 12:49:39,833 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:w
+string indices must be integers
+
+2019-03-29 12:49:39,841 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:c
+string indices must be integers
+
+2019-03-29 12:49:39,842 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:d
+string indices must be integers
+
+2019-03-29 12:49:39,843 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:m
+string indices must be integers
+
+2019-03-29 12:49:39,843 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:i
+string indices must be integers
+
+2019-03-29 12:49:39,844 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:w
+string indices must be integers
+
+2019-03-29 12:49:39,844 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:a
+string indices must be integers
+
+2019-03-29 12:49:39,844 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:w
+string indices must be integers
+
+2019-03-29 12:49:39,845 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:t
+string indices must be integers
+
+2019-03-29 12:49:39,845 ERROR 10152 29884 D:\events\host-server\WebServer\Cms.py 183 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+string indices must be integers
+
+2019-03-29 13:29:52,351 ERROR 14288 22996 D:\events\host-server\WebServer\Cms.py 182 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000022C7C312F60>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-03-29 13:29:52,351 ERROR 14288 22996 D:\events\host-server\WebServer\Cms.py 182 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+string indices must be integers
+
+2019-03-29 13:36:59,511 ERROR 14288 22996 D:\events\host-server\WebServer\Cms.py 182 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000022C7B0F2AC8>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-03-29 13:36:59,512 ERROR 14288 22996 D:\events\host-server\WebServer\Cms.py 182 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+string indices must be integers
+

@@ -10,4 +10,6 @@ ven
 .idea/*
 
 #log
-.log
+*.log
+
+__pycache__/

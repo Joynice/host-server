@@ -1,8 +1,5 @@
-# -*- coding: UTF-8 -*-
-__author__ = 'Joynice'
+from gevent import monkey; monkey.patch_all(thread=False)
 import gevent
-from gevent import monkey
-monkey.patch_all()
 import os
 import json
 import hashlib
@@ -11,13 +8,13 @@ from colorama import init, Fore
 from gevent.queue import Queue
 from app import create_app
 from config import config
-from models import Asset
+from models import Asset, Cms_fingerprint
 
 app = create_app()
 
 init(autoreset=True)
 
-class CmsInfo(object):
+class WebCms(object):
     def __init__(self, desurl, is_internet=True, thread=100, whatweb=False, file=None):
         self.file = file
         self.flag = True
@@ -31,7 +28,7 @@ class CmsInfo(object):
         self.location = Queue()  # 指纹队列
         self.header1 = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0',
                         'Content-Type': 'application/x-www-form-urlencoded'}
-        self.header2 = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'}
+        self.header2 = config['development'].HRADER
 
     # Url组成队列
     def UrlMake2Queue(self):
@@ -60,6 +57,13 @@ class CmsInfo(object):
         for i in CmsData:
             self.location.put(i)
         fp.close()
+
+    # 从数据库指纹组成队列
+    def CmsDBMake2Queue(self):
+        CmsData = Cms_fingerprint.query.all()
+        for i in CmsData:
+            self.location.put({'url':i.url, 'name':i.name, 're':i.re, 'md5':i.md5})
+
 
     # 清空队列
     def CleaerQueue(self):
@@ -123,7 +127,8 @@ class CmsInfo(object):
             if self.flag:
                 try:
                     info = requests.post(url='http://whatweb.bugscaner.com/what/', data=post, headers=headers).text
-                    print(info)
+                    info = json.loads(info)
+                    print(type(info), info)
                     if info['error'] == 'no':
                         # 结果返回正常
                         s = ''
@@ -200,15 +205,16 @@ class CmsInfo(object):
             print(url)
             print(self.whatweb)
             if not self.whatweb:
-                self.CmsMake2Queue()
+                self.CmsDBMake2Queue()
                 corlist = [gevent.spawn(self.Get2Location, url) for i in range(self.thread)]
                 gevent.joinall(corlist)
                 if self.res.empty() and self.IsInternet:
                     print(
                         Fore.CYAN + '[Message]: The local fingerprint is not found, and the network interface is called.')  # 本地指纹未发现,调用网络接口
-                    self.Get2Internet(url)
+                    # self.Get2Internet(url)
             else:
-                self.Get2Internet(url)
+                # self.Get2Internet(url)
+                pass
         print(Fore.CYAN + '[Message]: Log generation.')  # 日志生成中
         self.ErrorLog()
         res = self.ResultLog()
@@ -216,25 +222,7 @@ class CmsInfo(object):
         return res
 
 
-# ## 命令行参数解析
-# def Args():
-#     parse = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, add_help=False)
-#     parse.add_argument('-f', '--file', help='Please set FILE')
-#     parse.add_argument('-u', '--url', help="Please set scan URL")
-#     parse.add_argument('-t', '--thread', default=100, help='Please set Thread Number', type=int)
-#     parse.add_argument('-w', '--whatweb', default=False, help='Use whatweb probe directly',
-#                        action="store_true")  # 设置后跳过本地指纹检测,直接使用whatweb接口探测,默认为否
-#     parse.add_argument('-i', '--is_internet',
-#                        help="network environments,default true;if it's set,it will not be tested online", default=True,
-#                        action="store_false")  # 是否可以访问互联网，默认可以，设置后表示不可以
-#     args = parse.parse_args()
-#     if args.url is None and args.file is None:
-#         print(parse.print_help())
-#         exit()
-#     else:
-#         return args
-#
 if __name__ == "__main__":
     init(autoreset=True)
-    cms = CmsInfo(desurl='http://www.u-share.cn/forum.php/')
+    cms = WebCms(desurl='http://www.u-share.cn/forum.php/')
     cms.RunIt()

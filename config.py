@@ -34,6 +34,8 @@ class Config:
     LOG_FILE_MAX_BYTES = 100 * 1024 * 1024
     # 轮转数量是 10 个
     LOG_FILE_BACKUP_COUNT = 10
+    #浏览器useragent
+    HRADER = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'}
 
     @staticmethod
     def init_app(app):
@@ -53,7 +55,7 @@ class DevConfig(Config):
     #mysql配置
     MYSQL_HOST = '127.0.0.1'
     MYSQL_PORT = 3306
-    MYSQL_DATABASE = 'host-server-win'
+    MYSQL_DATABASE = 'host_server_win'
     MYSQL_USERNAME = 'root'
     MYSQL_PASSWORD = ''
 
@@ -62,8 +64,9 @@ class DevConfig(Config):
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
     #指纹配置
-    CMS_FINGERPRINT = os.getcwd()+ '/fingerprint/cms-fingerprint'
-    MANAGER_CMS_FINGERPRINT = os.getcwd()+ '/fingerprint/cms-fingerprint'
+    CMS_FINGERPRINT = os.path.join(os.getcwd(), 'fingerprint', 'cms-fingerprint')
+    TEST_CMS_SITE = os.path.join(os.getcwd(), 'fingerprint', 'testwebsite')
+    print(TEST_CMS_SITE)
 
     #log设置
     @classmethod

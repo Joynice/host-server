@@ -82,3 +82,27 @@ HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with 
 2019-03-29 13:36:59,512 ERROR 14288 22996 D:\events\host-server\WebServer\Cms.py 182 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
 string indices must be integers
 
+2019-04-02 15:37:00,454 ERROR 17232 22252 D:\events\host-server\WebServer\Cms.py 178 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000001C925839A20>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-04-02 15:37:00,470 ERROR 17232 22252 D:\events\host-server\WebServer\Cms.py 178 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+string indices must be integers
+
+2019-04-02 15:54:56,664 ERROR 24272 32444 D:\events\host-server\WebServer\Cms.py 178 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000001B89D6B5DD8>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-04-02 15:54:56,665 ERROR 24272 32444 D:\events\host-server\WebServer\Cms.py 178 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+string indices must be integers
+
+2019-04-02 15:59:05,514 ERROR 24492 20592 D:\events\host-server\WebServer\Cms.py 178 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000017171441D68>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-04-02 15:59:05,514 ERROR 24492 20592 D:\events\host-server\WebServer\Cms.py 178 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+Expecting value: line 1 column 9 (char 8)
+
+2019-04-02 16:02:58,015 ERROR 1728 4744 D:\events\host-server\WebServer\Cms.py 179 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
+HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000001F65CCF3320>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
+
+2019-04-02 16:02:58,016 ERROR 1728 4744 D:\events\host-server\WebServer\Cms.py 179 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
+Expecting value: line 1 column 9 (char 8)
+

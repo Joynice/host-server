@@ -127,3 +127,20 @@ class Cms_fingerprint(db.Model):
     name = db.Column(db.String(100), nullable=False)
     re = db.Column(db.String(100))
     md5 = db.Column(db.String(255))
+
+
+class TestWebsite(db.Model):
+    '''
+    测试网站
+    '''
+    __tablename__ = 'test_website'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    manufacturerUrl = db.Column(db.String(255), nullable=False)
+    manufacturerName = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+    url = db.Column(db.String(255), nullable=False)
+    re = db.Column(db.String(255))
+    md5 = db.Column(db.String(255))
+
+
+

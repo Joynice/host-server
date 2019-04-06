@@ -6,8 +6,7 @@ from . import field
 from .parse import HostServerPost_parse, HostServerDelete_parse, HostServerGet_parse, HostServerUpgrade_parse, \
     ResultGet_parse
 from exts import db
-from multiprocessing import Process
-import threading
+
 
 class HostServer(Resource):
 
@@ -33,7 +32,6 @@ class HostServer(Resource):
         '''
         from WebServer import Cms
         args = HostServerPost_parse.parse_args()
-        print(1111)
         url = args.get('url')
         cycle = args.get('cycle')
         number = args.get('number')
@@ -47,9 +45,9 @@ class HostServer(Resource):
             task_id = task.task_id
             result_id = task.result_id
             if number == 1:
-                t= threading.Thread(target=Cms.CmsInfo(desurl=url).RunIt())
-                # Cms.CmsInfo(desurl=url).RunIt()
-                t.start()
+                a = Cms.WebCms(desurl=url).RunIt()
+                print(a)
+
             return field.success(message='下发成功', data={'task_id': task_id, 'result_id': result_id})
         else:
             return field.params_error(message='参数缺失')

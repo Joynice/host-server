@@ -2,8 +2,12 @@
 venv
 ven
 
+
 # Python:
 *.py[cod]
 
 # pycharm
 .idea/*
+
+#log
+.log

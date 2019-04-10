@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
 from flask_restful import Resource
-from models import Task
+from models import Task, Asset
 from . import field
 from .parse import HostServerPost_parse, HostServerDelete_parse, HostServerGet_parse, HostServerUpgrade_parse, \
     ResultGet_parse
@@ -45,9 +45,7 @@ class HostServer(Resource):
             task_id = task.task_id
             result_id = task.result_id
             if number == 1:
-                a = Cms.WebCms(desurl=url).RunIt()
-                print(a)
-
+                Cms.WebCms(desurl=url).RunIt()
             return field.success(message='下发成功', data={'task_id': task_id, 'result_id': result_id})
         else:
             return field.params_error(message='参数缺失')

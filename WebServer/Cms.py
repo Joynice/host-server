@@ -1,5 +1,6 @@
 from gevent import monkey; monkey.patch_all(thread=False)
 import gevent
+import re
 import os
 import json
 import hashlib
@@ -9,7 +10,7 @@ from gevent.queue import Queue
 from app import create_app
 from config import config
 from models import Asset, Cms_fingerprint
-
+from exts import db
 app = create_app()
 
 init(autoreset=True)
@@ -60,7 +61,7 @@ class WebCms(object):
 
     # 从数据库指纹组成队列
     def CmsDBMake2Queue(self):
-        CmsData = Cms_fingerprint.query.all()
+        CmsData = Cms_fingerprint.query.order_by(Cms_fingerprint.hit_num.desc()).all()
         for i in CmsData:
             self.location.put({'url':i.url, 'name':i.name, 're':i.re, 'md5':i.md5})
 
@@ -194,6 +195,14 @@ class WebCms(object):
                 a = self.res.get()
                 if a not in res:
                     res.append(a)
+        if len(res) >= 1:
+            print(res)
+            asset = Asset(url=self.desurl, cms=re.findall('Target cms is : (.*?) Source', res[0].get('LocResult'))[0])
+        else:
+            asset = Asset(url=self.desurl, cms='www')
+        db.session.add(asset)
+        db.session.commit()
+
         print(Fore.CYAN + '[Message]: Completed generating the result log')
         return res
 
@@ -219,7 +228,6 @@ class WebCms(object):
         self.ErrorLog()
         res = self.ResultLog()
         print(Fore.CYAN + '[Message]:The program end.')
-        return res
 
 
 if __name__ == "__main__":

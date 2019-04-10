@@ -106,3 +106,192 @@ HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with 
 2019-04-02 16:02:58,016 ERROR 1728 4744 D:\events\host-server\WebServer\Cms.py 179 [error]: Network anomalies or Program error On: Get2Internet Destination URL:https://www.baidu.com
 Expecting value: line 1 column 9 (char 8)
 
+2019-04-10 14:20:33,220 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000208C297EC88>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,229 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /cnet/system/login.jsp (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000208C2783048>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,230 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /INSTALL (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000208C28DCE80>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,230 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /template/default/search.html (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000208C281D748>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,231 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /cnet/template/1/common.css (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000208C5BC2240>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,231 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /index.php (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000208C277B978>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,232 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /demo/templates/faq_en_us_utf-8.htm (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000208C8CB3400>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,233 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /templates/default/qunstyles/t1.css (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000208C8CDA978>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:20:33,233 ERROR 17280 16064 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /images/login_01.jpg (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000208C2688470>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,943 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /templets/default/style/dedecms.css (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000025D4A200320>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,944 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000025D4A1F7E48>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,944 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /Images/cover-default-s.gif (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000025D4A315C88>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,944 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /bbs/pic/0.gif (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000025D4A2A31D0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,944 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /images/logo/yunlogo.jpg (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000025D4B4B8860>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,945 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /alipay.html (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000025D50694940>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,945 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /tushu/imgs/s-6.jpg (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000025D4B4D9438>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:42:00,945 ERROR 16272 17896 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 14:57:08,124 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023527963EF0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,124 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /robots.txt (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023529957F98>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,125 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 14:57:08,125 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /sysmanage/Images/login_02.jpg (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000002352370A208>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,126 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 14:57:08,126 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /easweb/cp/stamp/res/CheckIEUtils.js (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000235248F5208>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,126 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /system/images/fun.js (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000235237036D8>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,127 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /themes/index/css/base.css (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000023529A020F0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,127 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 14:57:08,127 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /Inedu3In1/images/default/images/button_go.gif (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023529928390>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,127 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /INSTALL.sqlite.txt (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023529A63668>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,128 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /css//ajax-poller.css (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000235249A7AC8>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,128 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /ewebeditor/KindEditor.js (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000002352367C668>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,128 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /jiaowu2008/hlp/IMAGES/top.gif (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000023529BAAEF0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,128 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 14:57:08,128 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 14:57:08,128 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /new/Client/Css/style.css (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023529B12C50>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,129 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /e/data/ecmseditor/images/blank.html (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000023529B28748>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,129 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /css/default/closed_question.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000023529A74DA0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 14:57:08,129 ERROR 19440 20656 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /login/images/toolbar_back2.gif (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x0000023529B49898>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:09:45,214 ERROR 15304 12836 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000016EAF704F98>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:09:45,214 ERROR 15304 12836 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 15:09:45,214 ERROR 15304 12836 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 15:09:45,215 ERROR 15304 12836 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /adminsoft/templates/images/class_bg.jpg (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000016EB59C5048>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:16:56,837 ERROR 17280 20956 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001FDC439FCF8>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:16:56,838 ERROR 17280 20956 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /tool/img/kuang1.gif (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001FDBEF20C18>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:19:47,929 ERROR 17476 8476 D:\events\host-server\WebServer\Cms.py 186 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000157535696A0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:25:49,534 ERROR 20956 18476 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /data/index.html (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000002E548628A20>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:25:49,534 ERROR 20956 18476 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002E54E837128>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:27:26,943 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Max retries exceeded with url: /topLogo.gif (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x000002A00C5D50F0>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:27:26,944 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:27:26,952 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 15:27:26,952 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:27:26,952 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:27:26,952 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 15:27:26,953 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 15:27:26,953 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002A0073B9198>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:27:26,953 ERROR 20816 20940 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:29:27,301 ERROR 17884 14580 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001F45B4D9160>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:29:27,301 ERROR 17884 14580 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Max retries exceeded with url: /images/1012.gif (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001F4607FEA58>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:30:57,556 ERROR 21128 6252 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002AE126126D8>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-10 15:30:57,557 ERROR 21128 6252 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:45:01,428 ERROR 21420 20284 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPSConnectionPool(host='www.phpwind.net', port=443): Read timed out. (read timeout=3)
+
+2019-04-10 15:45:01,428 ERROR 21420 20284 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:45:01,429 ERROR 21420 20284 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeout=3)
+
+2019-04-10 15:45:01,429 ERROR 21420 20284 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000022FFF701C88>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+

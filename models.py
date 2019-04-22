@@ -48,7 +48,6 @@ class Task(db.Model):
                       default=str(State.WAIT_SCAN))
     result = db.Column(db.Text, nullable=True)
     html = db.Column(db.Text, nullable=True)
-    asset = db.relationship('Asset', uselist=False)
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('number') > 1:
@@ -106,7 +105,6 @@ class Asset(db.Model):
     '''
     __tablename__ = 'asset'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    url_id = db.Column(db.Integer, db.ForeignKey('task.id'))
     webapp = db.Column(db.String(255))
     os = db.Column(db.String(255))
     server = db.Column(db.String(255))
@@ -114,7 +112,7 @@ class Asset(db.Model):
     component = db.Column(db.String(255))
     waf = db.Column(db.String(255))
     cms = db.Column(db.String(255))
-    url = db.relationship('Task')
+    url = db.Column(db.String(255), unique=True)
 
 
 class Cms_fingerprint(db.Model):
@@ -127,6 +125,7 @@ class Cms_fingerprint(db.Model):
     name = db.Column(db.String(100), nullable=False)
     re = db.Column(db.String(100))
     md5 = db.Column(db.String(255))
+    hit_num = db.Column(db.Integer, default=0, nullable=False)
 
 
 class TestWebsite(db.Model):
@@ -141,6 +140,3 @@ class TestWebsite(db.Model):
     url = db.Column(db.String(255), nullable=False)
     re = db.Column(db.String(255))
     md5 = db.Column(db.String(255))
-
-
-

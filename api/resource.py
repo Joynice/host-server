@@ -6,6 +6,7 @@ from . import field
 from .parse import HostServerPost_parse, HostServerDelete_parse, HostServerGet_parse, HostServerUpgrade_parse, \
     ResultGet_parse
 from exts import db
+from task import cms
 
 
 class HostServer(Resource):
@@ -30,7 +31,7 @@ class HostServer(Resource):
         下发任务
         :return:
         '''
-        from WebServer import Cms
+
         args = HostServerPost_parse.parse_args()
         url = args.get('url')
         cycle = args.get('cycle')
@@ -41,13 +42,11 @@ class HostServer(Resource):
             try:
                 db.session.commit()
             except Exception as e:
-                return field.params_error(message=e)
+                return field.params_error(message='创建任务失败!')
             task_id = task.task_id
             result_id = task.result_id
             if number == 1:
-                a = Cms.WebCms(desurl=url).RunIt()
-                print(a)
-
+                cms.delay(url)
             return field.success(message='下发成功', data={'task_id': task_id, 'result_id': result_id})
         else:
             return field.params_error(message='参数缺失')

@@ -4,10 +4,12 @@ import os
 import json
 import hashlib
 import requests
+import re
 from colorama import init, Fore
 from gevent.queue import Queue
 from app import create_app
 from config import config
+from exts import db
 from models import Asset, Cms_fingerprint
 
 app = create_app()
@@ -194,6 +196,31 @@ class WebCms(object):
                 a = self.res.get()
                 if a not in res:
                     res.append(a)
+        if len(res) >= 1:
+            print(res)
+            result = res[0].get('LocResult')
+            keyword = re.findall('KeyWord : (.+)', result)[0]
+            cms = re.findall('Target cms is : (.*?) Source', result)[0]
+            try:
+                asset = Asset.query.filter_by(url=self.desurl).first()
+                print(asset)
+                if asset:
+                    if asset.cms == None:
+                        asset.cms = cms
+                        db.session.add(asset)
+                        db.session.commit()
+            except:
+                asset = Asset(url=self.desurl, cms=cms)
+                db.session.add(asset)
+                db.session.commit()
+            key = Cms_fingerprint.query.filter_by(re=keyword).first() or Cms_fingerprint.query.filter_by(md5=keyword).first()
+            if key:
+                key.hit_num += 1
+            db.session.add(key)
+            db.session.commit()
+
+
+
         print(Fore.CYAN + '[Message]: Completed generating the result log')
         return res
 

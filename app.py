@@ -15,7 +15,7 @@ app = create_app()
 
 api = Api(app)
 
-api.add_resource(HostServer, '/v1/task/',endpoint='task')
+api.add_resource(HostServer, '/v1/task/', endpoint='task')
 api.add_resource(Result, '/v1/result/', endpoint='result')
 
 if __name__ == '__main__':

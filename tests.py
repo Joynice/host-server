@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
-import requests
+
 
 # def cms(url):
 #     headers ={
@@ -19,3 +19,7 @@ import os
 print(os.getcwd())
 print(os.path.join(os.getcwd(), 'fingerprint', 'cms-fingerprint'))
 print(os.path.join('\\fingerprint'))
+a = 'Target cms is : PHP168(国徽) Source : http://www.qibosoft.com KeyWord : php168'
+import re
+b = re.findall('KeyWord : (.+)', a)
+print(b)

@@ -27,5 +27,5 @@ celery = make_celery(app)
 
 
 @celery.task
-def cms():
-    pass
+def cms(url):
+    WebCms(desurl=url).RunIt()

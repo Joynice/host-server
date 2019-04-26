@@ -6,7 +6,7 @@ import requests
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
-from app import create_app
+from apps import create_app
 from config import config
 from exts import db
 from models import Cms_fingerprint, TestWebsite

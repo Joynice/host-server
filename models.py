@@ -113,6 +113,7 @@ class Asset(db.Model):
     waf = db.Column(db.String(255))
     cms = db.Column(db.String(255))
     url = db.Column(db.String(255), unique=True)
+    upgrade_time = db.Column(db.DateTime, default=None)
 
 
 class Cms_fingerprint(db.Model):

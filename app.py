@@ -4,12 +4,14 @@ import config
 from exts import db
 from api.resource import HostServer, Result
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config.config['development'])
     config.config['development'].init_app(app)
     db.init_app(app)
     return app
+
 
 app = create_app()
 

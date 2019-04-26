@@ -6,7 +6,6 @@ from . import field
 from .parse import HostServerPost_parse, HostServerDelete_parse, HostServerGet_parse, HostServerUpgrade_parse, \
     ResultGet_parse
 from exts import db
-from task import cms
 
 
 class HostServer(Resource):
@@ -31,7 +30,8 @@ class HostServer(Resource):
         下发任务
         :return:
         '''
-
+        # from tasks import cms
+        from WebServer.Cms import WebCms
         args = HostServerPost_parse.parse_args()
         url = args.get('url')
         cycle = args.get('cycle')
@@ -46,8 +46,9 @@ class HostServer(Resource):
             task_id = task.task_id
             result_id = task.result_id
             if number == 1:
-                cms.delay(url)
-            return field.success(message='下发成功', data={'task_id': task_id, 'result_id': result_id})
+                WebCms(desurl=url).RunIt()
+                print(1111111111111111111111111111111111111)
+            return field.success(message='任务成功，结果请自己查询', data={'task_id': task_id, 'result_id': result_id})
         else:
             return field.params_error(message='参数缺失')
 

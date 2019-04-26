@@ -7,7 +7,7 @@ import requests
 import re
 from colorama import init, Fore
 from gevent.queue import Queue
-from app import create_app
+from apps import create_app
 from config import config
 from exts import db
 from models import Asset, Cms_fingerprint
@@ -62,9 +62,9 @@ class WebCms(object):
 
     # 从数据库指纹组成队列
     def CmsDBMake2Queue(self):
-        CmsData = Cms_fingerprint.query.all()
+        CmsData = Cms_fingerprint.query.order_by(Cms_fingerprint.hit_num.desc())
         for i in CmsData:
-            self.location.put({'url':i.url, 'name':i.name, 're':i.re, 'md5':i.md5})
+            self.location.put({'url': i.url, 'name': i.name, 're': i.re, 'md5': i.md5})
 
 
     # 清空队列
@@ -181,11 +181,10 @@ class WebCms(object):
 
     # 错误日志输出
     def ErrorLog(self):
-        if not self.message.empty():
-            while not self.message.empty():
-                msg = self.message.get()
-                for key, value in msg.items():
-                    app.logger.error('[%s]: %s\n' % (key, value))
+        while not self.message.empty():
+            msg = self.message.get()
+            for key, value in msg.items():
+                app.logger.error('[%s]: %s\n' % (key, value))
         print(Fore.CYAN + '[Message]: Completed generating the error log')
 
     # 扫描结果输出
@@ -203,7 +202,6 @@ class WebCms(object):
             cms = re.findall('Target cms is : (.*?) Source', result)[0]
             try:
                 asset = Asset.query.filter_by(url=self.desurl).first()
-                print(asset)
                 if asset:
                     if asset.cms == None:
                         asset.cms = cms

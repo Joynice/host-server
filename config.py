@@ -99,12 +99,12 @@ class DevConfig(Config):
         # file_handler_warning = RotatingFileHandler(filename=cls.LOG_PATH_WARNING)
         # file_handler_warning.setFormatter(formatter)
         # file_handler_warning.setLevel(logging.WARNING)
-        # app.logger.addHandler(file_handler_warning)
+        # apps.logger.addHandler(file_handler_warning)
 
 
     # celery相关的配置
-    CELERY_RESULT_BACKEND = 'redis://{}：{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
-    CELERY_BROKER_URL = 'redis://{}：{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
+    CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
+    CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
 
 
 config = {

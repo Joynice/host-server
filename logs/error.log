@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2019-03-26 18:56:57,676 ERROR 8452 12424 D:\events\host-server\WebServer\Cms.py 181 [error]: Network anomalies or Program error. On: Get2Location. URL:https://www.baidu.com
 HTTPSConnectionPool(host='www.baidu.com', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x00000234BE5739E8>, 'Connection to www.baidu.com timed out. (connect timeout=3)'))
 
@@ -294,4 +295,1171 @@ HTTPConnectionPool(host='www.phpwind.net', port=80): Read timed out. (read timeo
 
 2019-04-10 15:45:01,429 ERROR 21420 20284 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
 HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000022FFF701C88>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+=======
+>>>>>>> db52d3e585e99bbeac46cb7b117bdb83b1115df1
+2019-04-26 12:28:32,509 ERROR 9640 26224 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /login/ [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 158, in dispatch_request
+    return meth(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 18, in get
+    return render_template('cms/login.html', message=message)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\login.html", line 2, in top-level template code
+    {% from 'common/_macros.html' import static %}
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 58, in get_source
+    return self._get_source_fast(environment, template)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 86, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: common/_macros.html
+2019-04-26 12:30:22,730 ERROR 22816 14464 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 11, in inner
+    if config['development'].CMS_USER_ID in session:
+AttributeError: type object 'DevConfig' has no attribute 'CMS_USER_ID'
+2019-04-26 12:44:11,502 ERROR 31404 16404 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 25, in top-level template code
+    <li><a href="{{url_for('cms.profile') }}">{{ g.cms_user.username }}</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.profile'. Did you mean 'admin.index' instead?
+2019-04-26 12:44:12,986 ERROR 31404 17184 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 25, in top-level template code
+    <li><a href="{{url_for('cms.profile') }}">{{ g.cms_user.username }}</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.profile'. Did you mean 'admin.index' instead?
+2019-04-26 12:44:15,019 ERROR 31404 36584 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 25, in top-level template code
+    <li><a href="{{url_for('cms.profile') }}">{{ g.cms_user.username }}</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.profile'. Did you mean 'admin.index' instead?
+2019-04-26 12:46:45,089 ERROR 29092 33584 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 25, in top-level template code
+    <li><a href="#">{{ g.cms_user.username }}</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'flask.ctx._AppCtxGlobals object' has no attribute 'cms_user'
+2019-04-26 12:47:44,715 ERROR 35760 27564 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 39, in top-level template code
+    <li class="unfold"><a href="{{ url_for('cms.index') }}">首页</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.index'. Did you mean 'admin.index' instead?
+2019-04-26 12:48:11,891 ERROR 31816 28352 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 50, in top-level template code
+    {% if cms_user.has_permission(CMSPermission.POSTER) %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'flask.ctx._AppCtxGlobals object' has no attribute 'cms_user'
+2019-04-26 12:48:17,287 ERROR 31816 31784 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 50, in top-level template code
+    {% if cms_user.has_permission(CMSPermission.POSTER) %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'flask.ctx._AppCtxGlobals object' has no attribute 'cms_user'
+2019-04-26 12:49:38,850 ERROR 16932 24060 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 12:50:20,846 ERROR 16932 35936 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 12:52:48,595 ERROR 16776 26076 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 12:53:38,117 ERROR 25668 28752 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 12:55:14,718 ERROR 31400 24656 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 12:59:09,768 ERROR 36804 1548 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:04:30,463 ERROR 36800 34044 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:05:43,227 ERROR 36800 29624 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:05:49,205 ERROR 33460 26708 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:05:58,254 ERROR 32376 16872 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:06:02,163 ERROR 32376 936 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /login/ [POST]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 158, in dispatch_request
+    return meth(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 33, in post
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:07:49,412 ERROR 33648 28352 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /login/ [POST]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 158, in dispatch_request
+    return meth(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 33, in post
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 39, in top-level template code
+    <li class="unfold"><a href="{{ url_for('cms.index') }}">首页</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.index'. Did you mean 'admin.index' instead?
+2019-04-26 13:08:12,667 ERROR 33648 32728 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /login/ [POST]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 158, in dispatch_request
+    return meth(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 33, in post
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 39, in top-level template code
+    <li class="unfold"><a href="{{ url_for('admin.index') }}">首页</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.index'. Did you mean 'admin.index' instead?
+2019-04-26 13:08:20,773 ERROR 31540 29836 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /login/ [POST]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 158, in dispatch_request
+    return meth(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 33, in post
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 43, in top-level template code
+    <li><a href="{{ url_for('cms.profile') }}">个人信息</a></li>
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "D:\events\host-server\ven\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'cms.profile'. Did you mean 'admin.index' instead?
+2019-04-26 13:09:06,899 ERROR 31792 16444 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /login/ [POST]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\flask\views.py", line 158, in dispatch_request
+    return meth(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 33, in post
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\parser.py", line 890, in subparse
+    raise AssertionError('internal parsing error')
+AssertionError: internal parsing error
+2019-04-26 13:25:23,320 ERROR 34960 14444 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 9, in top-level template code
+    <link rel="stylesheet" href="{{ static('cms/css/base.css')}}">
+jinja2.exceptions.UndefinedError: 'static' is undefined
+2019-04-26 13:25:47,896 ERROR 34960 30164 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 9, in top-level template code
+    {% include 'common/_head.html' %}
+jinja2.exceptions.UndefinedError: 'static' is undefined
+2019-04-26 13:25:49,435 ERROR 34960 33696 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 9, in top-level template code
+    {% include 'common/_head.html' %}
+jinja2.exceptions.UndefinedError: 'static' is undefined
+2019-04-26 13:25:50,297 ERROR 34960 30792 D:\events\host-server\ven\lib\site-packages\flask\app.py 1761 Exception on /admin [GET]
+Traceback (most recent call last):
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask_restful\__init__.py", line 269, in error_router
+    return original_handler(e)
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\events\host-server\ven\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:\events\host-server\apps\cms\decorators.py", line 12, in inner
+    return func(*args, **kwargs)
+  File "D:\events\host-server\apps\cms\views.py", line 13, in index
+    return render_template('cms/cms_index.html')
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "D:\events\host-server\ven\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "D:\events\host-server\ven\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "D:\events\host-server\templates\cms\cms_index.html", line 1, in top-level template code
+    {% extends 'cms/cms_base.html' %}
+  File "D:\events\host-server\templates\cms\cms_base.html", line 9, in top-level template code
+    {% include 'common/_head.html' %}
+jinja2.exceptions.UndefinedError: 'static' is undefined
+2019-04-26 13:35:42,860 ERROR 33920 24392 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000179B715C470>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-26 13:36:19,892 ERROR 33920 24392 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000179B72BEC18>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
+
+2019-04-26 13:38:35,806 ERROR 33920 24392 D:\events\host-server\WebServer\Cms.py 187 [error]: Network anomalies or Program error. On: Get2Location. URL:http://www.phpwind.net
+HTTPConnectionPool(host='www.phpwind.net', port=3312): Max retries exceeded with url: /vhost/view/default/imgs/vhost_login.png (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000179B7245AC8>, 'Connection to www.phpwind.net timed out. (connect timeout=3)'))
 

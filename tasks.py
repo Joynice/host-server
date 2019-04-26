@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
 from celery import Celery
-from app import create_app
+from apps import create_app
 from WebServer.Cms import WebCms
 app = create_app()
 
@@ -27,5 +27,5 @@ celery = make_celery(app)
 
 
 @celery.task
-def cms():
-    pass
+def cms(url):
+    WebCms(desurl=url).RunIt()

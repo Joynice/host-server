@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
-import requests
+
 
 # def cms(url):
 #     headers ={
@@ -15,13 +15,4 @@ import requests
 #
 #
 # cms('https://www.zut.edu.cn/')
-import os
-print(os.getcwd())
-print(os.path.join(os.getcwd(), 'fingerprint', 'cms-fingerprint'))
-print(os.path.join('\\fingerprint'))
 
-import re
-
-a = {'LocResult': 'Target cms is : PHPWind Source : http://www.phpwind.net KeyWord : phpwind'}
-b = a.get('LocResult')
-print(re.findall('Target cms is : (.*?) Source', a.get('LocResult')))

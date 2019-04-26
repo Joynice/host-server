@@ -53,11 +53,11 @@ class DevConfig(Config):
     REDIS_PASSWORD = ''
 
     #mysql配置
-    MYSQL_HOST = '127.0.0.1'
+    MYSQL_HOST = '10.63.2.199'
     MYSQL_PORT = 3306
     MYSQL_DATABASE = 'host_server_win'
-    MYSQL_USERNAME = 'root'
-    MYSQL_PASSWORD = ''
+    MYSQL_USERNAME = 'Joynice'
+    MYSQL_PASSWORD = 'liran123/'
 
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DATABASE)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -66,7 +66,9 @@ class DevConfig(Config):
     #指纹配置
     CMS_FINGERPRINT = os.path.join(os.getcwd(), 'fingerprint', 'cms-fingerprint')
     TEST_CMS_SITE = os.path.join(os.getcwd(), 'fingerprint', 'testwebsite')
-    print(TEST_CMS_SITE)
+
+    #用户session
+    CMS_USER_ID = 'DSADSAD1551512'
 
     #log设置
     @classmethod
@@ -99,12 +101,12 @@ class DevConfig(Config):
         # file_handler_warning = RotatingFileHandler(filename=cls.LOG_PATH_WARNING)
         # file_handler_warning.setFormatter(formatter)
         # file_handler_warning.setLevel(logging.WARNING)
-        # app.logger.addHandler(file_handler_warning)
+        # apps.logger.addHandler(file_handler_warning)
 
 
     # celery相关的配置
-    CELERY_RESULT_BACKEND = 'redis://{}：{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
-    CELERY_BROKER_URL = 'redis://{}：{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
+    CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
+    CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
 
 
 config = {

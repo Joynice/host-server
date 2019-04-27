@@ -72,6 +72,7 @@ class HostServer(Resource):
                 task.number = number or task.number
                 task.cycle = cycle or task.cycle
                 db.session.commit()
+                return field.success(message='更新任务成功！')
             else:
                 return field.params_error(message='没有找到该任务')
         else:

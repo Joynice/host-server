@@ -1,9 +1,12 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
 from celery import Celery
-from apps import create_app
-from WebServer.Cms import WebCms
+from app import create_app
+from exts import email
+from flask_mail import Message
+
 app = create_app()
+email.init_app(app)
 
 
 def make_celery(app):
@@ -26,6 +29,11 @@ def make_celery(app):
 celery = make_celery(app)
 
 
+# @celery.task
+# def cms(url):
+#     WebCms(desurl=url).RunIt()
+
 @celery.task
-def cms(url):
-    WebCms(desurl=url).RunIt()
+def send_mail(subject, recipients, body):
+    message = Message(subject=subject, recipients=recipients, body=body)
+    email.send(message)

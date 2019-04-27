@@ -28,7 +28,7 @@ $(function () {
         var profileLi = $('.profile-li');
         profileLi.addClass('unfold').siblings().removeClass('unfold');
         profileLi.children('.subnav').children().eq(0).addClass('active').siblings().removeClass('active');
-    } else if(url.indexOf('resetpwd') >= 0){
+    } else if(url.indexOf('resetpw') >= 0){
         var profileLi = $('.profile-li');
         profileLi.addClass('unfold').siblings().removeClass('unfold');
         profileLi.children('.subnav').children().eq(1).addClass('active').siblings().removeClass('active');

@@ -4,7 +4,7 @@ from flask_restful import Api
 import config
 from exts import db
 from api.resource import HostServer, Result
-# from flask_wtf import CSRFProtect
+from  flask_wtf import CsrfProtect
 from apps.cms import bp as cms_bp
 from apps.common import bp as common_bp
 
@@ -15,7 +15,7 @@ def create_app():
     app.register_blueprint(common_bp)
     config.config['development'].init_app(app)
     db.init_app(app)
-    # CSRFProtect(app)
+    CsrfProtect(app)
     return app
 
 

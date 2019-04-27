@@ -23,7 +23,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">欢迎使用主机服务检测系统</a>
+          <a class="navbar-brand" href="#">牧羊人主机服务检测系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -45,21 +45,21 @@
                 <li class="profile-li">
                     <a href="#">个人中心<span></span></a>
                     <ul class="subnav">
-                        <li><a href="#">个人信息</a></li>
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="#">修改邮箱</a></li>
+                        <li><a href="{{ url_for('admin.profile') }}">个人信息</a></li>
+                        <li><a href="{{ url_for('admin.resetpw') }}">修改密码</a></li>
+                        <li><a href="{{ url_for('admin.resetemail') }}">修改邮箱</a></li>
                     </ul>
                 </li>
 
-                <li class="nav-group post-manage"><a href="#">帖子管理</a></li>
-                <li class="comments-manage"><a href="#">评论管理</a></li>
-                <li class="board-manage"><a href="#">板块管理</a></li>
+                <li class="nav-group post-manage"><a href="#">任务管理</a></li>
+                <li class="comments-manage"><a href="#">指纹库管理</a></li>
+                <li class="board-manage"><a href="#">资产管理</a></li>
 
-                <li class="nav-group user-manage"><a href="#">用户管理</a></li>
-                <li class="role-manage"><a href="#">组管理</a></li>
+                <li class="nav-group user-manage"><a href="#">管理员任务系统</a></li>
+                <li class="role-manage"><a href="#">用户管理</a></li>
 
                 <li class="nav-group cmsuser-manage"><a href="#">CMS用户管理</a></li>
-                <li class="cmsrole-manage"><a href="#">CMS组管理</a></li>
+                <li class="cmsrole-manage"><a href="#">用户组管理</a></li>
             </ul>
           </div>
           <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

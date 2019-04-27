@@ -70,6 +70,15 @@ class DevConfig(Config):
     #用户session
     CMS_USER_ID = 'DSADSAD1551512'
 
+    # 发送者邮箱的服务器地址
+    MAIL_SERVER = "smtp.qq.com"
+    MAIL_PORT = '587'
+    MAIL_USE_TLS = True
+    # MAIL_USE_SSL
+    MAIL_USERNAME = '1125365907@qq.com'
+    MAIL_PASSWORD = 'fymamdgjrovehgcd'
+    MAIL_DEFAULT_SENDER = '1125365907@qq.com'
+
     #log设置
     @classmethod
     def init_app(cls, app):

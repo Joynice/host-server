@@ -30,3 +30,22 @@ def IntToString(Int):
         return 'Cycle.HALF_MONTH'
     elif Int == 30:
         return 'Cycle.ONEMONTH'
+
+
+def IntToStatus(Int):
+    if Int == 1:
+        return 'LoginEnum.UP'
+    else:
+        return 'LoginEnum.DOWN'
+
+def StatusToString(status):
+    if status == 'LoginEnum.UP':
+        return '在线'
+    else:
+        return '离线'
+
+def NoneToString(none):
+    if none == 'None':
+        return '未启用'
+    else:
+        pass

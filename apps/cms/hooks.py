@@ -11,8 +11,10 @@ def before_request():
     if config['development'].CMS_USER_ID in session:
         user_id = session.get(config['development'].CMS_USER_ID)
         user = User.query.get(user_id)
+        all_user =  User.query.all()
         if user:
             g.cms_user = user
+            g.all_user = all_user
 
 @bp.context_processor
 def cms_context_processor():

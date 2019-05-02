@@ -61,7 +61,7 @@ def add_test_cms():
 def create_cms_user(username, password, email):
     avatar = GithubAvatarGenerator()
     path = '../static/cms/img/user/'+ email +'.png'
-    avatar.save_avatar(path)
+    avatar.save_avatar(filepath='./static/cms/img/user/'+ email +'.png')
     user = User(username=username, password=password, email=email, avatar_path=path)
     db.session.add(user)
     db.session.commit()

@@ -1,12 +1,15 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
-from exts import db
-import enum
 import datetime
+import enum
+import os
+
 import shortuuid
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from exts import db
 from .filter import StringToInt
-import os
+
 sep = os.sep
 import random
 
@@ -33,6 +36,16 @@ class GenderEnum(enum.Enum):
     FEMALE = 2
     SECRET = 3
     UNKNOW = 4
+
+
+class LoginEnum(enum.Enum):
+    UP = 1
+    DOWN = 0
+
+
+class ApiEnum(enum.Enum):
+    UP = 1
+    DOWN = 0
 
 class CMSPersmission(object):
     #所有权限
@@ -68,7 +81,7 @@ class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.String(100), primary_key=True, default=shortuuid.uuid)
     telephone = db.Column(db.String(11), unique=True)
-    username = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(50), nullable=False, unique=True)
     _password = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(50), unique=True)
     realname = db.Column(db.String(20))
@@ -78,6 +91,9 @@ class User(db.Model):
         db.Enum(str(GenderEnum.MALE), str(GenderEnum.FEMALE), str(GenderEnum.SECRET), str(GenderEnum.UNKNOW)),
         default=str(GenderEnum.UNKNOW))
     join_time = db.Column(db.DateTime, default=datetime.datetime.now)
+    last_login_time = db.Column(db.DateTime, default=datetime.datetime.now())
+    is_activate = db.Column(db.Enum(str(LoginEnum.UP), str(LoginEnum.DOWN)))
+    is_api = db.Column(db.Enum(str(ApiEnum.UP), str(ApiEnum.DOWN)), default=str(ApiEnum.UP))
     secret_key = db.Column(db.String(100))
     tasks = db.relationship('Task', backref='user', lazy=True)
 

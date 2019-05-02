@@ -15,10 +15,10 @@ from exts import db, socketio
 from models import Cms_fingerprint
 from utils import zlcache, rediscache
 from .decorators import login_required, permission_required
-from .filter import StringToInt, IntToString
+from .filter import StringToInt, IntToString, IntToStatus, StatusToString, NoneToString
 from .forms import LoginForm, ResetEmailForm, ResetpwdForm, UpgradeTaskForm, AddTaskFoem, DeleteTaskForm, \
     UpgradeCmsForm, DeleteCmsForm, AddCmsForm
-from .models import User, CMSPersmission, Task
+from .models import User, CMSPersmission, Task, CMSRole
 
 thread = None
 async_mode = None
@@ -35,6 +35,10 @@ def index():
 @bp.route('logout/')
 @login_required
 def logout():
+    user = g.cms_user
+    user.is_activate = IntToStatus(0)
+    db.session.add(user)
+    db.session.commit()
     del session[config['development'].CMS_USER_ID]
     return redirect(url_for('admin.login'))
 
@@ -296,6 +300,19 @@ def dcms():
         message = form.get_error()
         return field.params_error(message=message)
 
+#用户管理
+@bp.route('usermanger/')
+@login_required
+@permission_required(CMSPersmission.USERMANGER)
+def usermanger():
+    roles = CMSRole.query.all()
+    users = User.query.all()
+    context = {
+        'roles': roles,
+        'users': users
+    }
+    return render_template('cms/cms_usermanger.html', **context)
+
 #登录
 class LoginView(views.MethodView):
     def get(self, message=None):
@@ -313,6 +330,10 @@ class LoginView(views.MethodView):
                 if remember:
                     # 如果设置session.permanent = True，那么过期时间为31天
                     session.permanent = True
+                user.last_login_time = datetime.datetime.now()
+                user.is_activate = IntToStatus(1)
+                db.session.add(user)
+                db.session.commit()
                 return field.success(message='登陆成功！')
             else:
                 return field.params_error(message='邮箱或者密码错误')
@@ -402,3 +423,5 @@ bp.add_url_rule('resetpw/', view_func=ReetPWView.as_view('resetpw'))
 bp.add_url_rule('secretkey/', view_func=SecretKey.as_view('secretkey'))
 bp.add_url_rule('profile/', view_func=ProFileView.as_view('profile'))
 bp.add_app_template_filter(StringToInt, 'To')
+bp.add_app_template_filter(StatusToString, 'UPORDOWN')
+bp.add_app_template_filter(NoneToString, 'None')

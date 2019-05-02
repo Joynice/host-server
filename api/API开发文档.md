@@ -1,7 +1,8 @@
 #主动式系统服务指纹识别Api开发文档
 ___
 ##介绍
-现阶段主要实现了任务下发、查询、更新、删除功能，更多功能继续增加
+现阶段主要实现了任务下发、查询、更新、删除功能，更多功能继续增加。以下各个API的调用需要验证Secret Key。
+
 ###下发任务
 ```text
  url : /v1/task/
@@ -15,6 +16,7 @@ ___
 |url|String|Y|扫描任务url
 |cycle|Inter|Y|扫描周期(1,3,7)
 |number|Inter|N|默认为1(1：立即执行)
+|secret_key|String|Y|身份验证
 
 返回参数
 
@@ -36,6 +38,7 @@ method: get
 |名称|类型|是否必须|描述
 |:----:|:----:|:----:|:----|
 |result_id|String|Y|查询ID
+|secret_key|String|Y|身份验证
 
 返回参数
 
@@ -61,6 +64,7 @@ method: put
 task_id|String|Y|需要更新任务ID
 |cycle|Inter|N|扫描周期(1,3,7)
 |number|Inter|N|默认为1(1：立即执行)
+|secret_key|String|Y|身份验证
 
 返回参数
 
@@ -80,6 +84,7 @@ method: delete
 |名称|类型|是否必须|描述
 |:---:|:---:|:---:|:---:
 task_id|String|Y|需要输出任务ID
+|secret_key|String|Y|身份验证
 
 返回参数
 
@@ -98,6 +103,7 @@ method : get
 |名称|类型|是否必须|描述
 |:----:|:---:|:---:|:---:|
 task_id|String|Y|查询任务ID
+|secret_key|String|Y|身份验证
 
 返回参数
 

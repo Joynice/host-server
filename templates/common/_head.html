@@ -1,6 +1,7 @@
 <meta charset="UTF-8">
 {#<meta name="csrf-token" content="{{ csrf_token() }}">#}
-<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+{% from 'common/_macros.html' import static %}
+<script src="{{ static('common/jquery.min.js')}}"></script>
 <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static',filename='common/sweetalert/sweetalert.css') }}">

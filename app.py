@@ -2,10 +2,11 @@
 from flask import Flask
 from flask_restful import Api
 import config
-from exts import db
+from exts import db, socketio
 from api.resource import HostServer, Result
-from  flask_wtf import CsrfProtect
+# from  flask_wtf import CsrfProtect
 from apps.cms import bp as cms_bp
+import datetime
 from apps.common import bp as common_bp
 
 def create_app():
@@ -15,7 +16,9 @@ def create_app():
     app.register_blueprint(common_bp)
     config.config['development'].init_app(app)
     db.init_app(app)
-    CsrfProtect(app)
+    app.permanent_session_lifetime = datetime.timedelta(seconds=60 * 60 * 6)
+    socketio.init_app(app)
+    # CsrfProtect(app)
     return app
 
 
@@ -27,4 +30,4 @@ api.add_resource(HostServer, '/v1/task/', endpoint='task')
 api.add_resource(Result, '/v1/result/', endpoint='result')
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000)

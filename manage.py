@@ -11,7 +11,7 @@ from config import config
 from exts import db
 from models import Cms_fingerprint, TestWebsite
 from apps.cms import models as cms_models
-
+from utils.avatar import GithubAvatarGenerator
 
 app = create_app()
 manager = Manager(app)
@@ -29,6 +29,7 @@ def add_cms_fingerprint():
     for i in CmsData:
         cms = Cms_fingerprint(url=i.get('url'), re=i.get('re'), name=i.get('name'), md5=i.get('md5'))
         db.session.add(cms)
+    print('添加成功！')
     db.session.commit()
 
 @manager.command
@@ -44,7 +45,6 @@ def add_test_cms():
                     cms = TestWebsite(manufacturerUrl=i.get('manufacturerUrl'), manufacturerName=i.get('manufacturerName'),
                                       name=i.get('program_name'), url=i.get('url'), md5=i.get('recognition_content'))
                 else:
-                    print(22222222222222222222222222222222222)
                     cms = TestWebsite(manufacturerUrl=i.get('manufacturerUrl'), manufacturerName=i.get('manufacturerName'),
                                       name=i.get('program_name'), url=i.get('url'), re=i.get('recognition_content'))
                 db.session.add(cms)
@@ -59,7 +59,10 @@ def add_test_cms():
 @manager.option('-p', '--password', dest='password')
 @manager.option('-e', '--email', dest='email')
 def create_cms_user(username, password, email):
-    user = User(username=username, password=password, email=email)
+    avatar = GithubAvatarGenerator()
+    path = '../static/cms/img/user/'+ email +'.png'
+    avatar.save_avatar(path)
+    user = User(username=username, password=password, email=email, avatar_path=path)
     db.session.add(user)
     db.session.commit()
     print('cms用户添加成功')
@@ -76,14 +79,19 @@ def create_role():
     user = Role(name='普通用户', desc='可以下发任务，查询任务结果。')
     user.permissions = Permission.VISITOR | Permission.POST
     # 3.管理员（拥有绝大多数权限）
-    admin = Role(name='管理员', desc='拥有本系统所有权限。')
-    admin.permissions = Permission.VISITOR | Permission.POST | Permission.MANAGER
+    admin = Role(name='管理员', desc='拥有本系统大部分权限。')
+    admin.permissions = Permission.VISITOR | Permission.POST | Permission.MANAGER | Permission.FINGER |Permission.ZCMANGAGE
 
-    # 4.开发者
+    # 4.超级管理员
+    superadmin = Role(name='超级管理员', desc='拥有本系统所有权限。')
+    superadmin.permissions = Permission.ALL_PERMISSON
+
+    # 5.开发者
     developer = Role(name='开发者', desc='开发者专用角色。')
     developer.permissions = Permission.ALL_PERMISSON
 
-    db.session.add_all([visitor, user, admin, developer])
+    db.session.add_all([visitor, user, admin, developer, superadmin])
+    print('添加完成')
     db.session.commit()
 
 '''

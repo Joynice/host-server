@@ -60,5 +60,17 @@ $(function () {
     }else if(url.indexOf('banners') >= 0) {
         var bannerManageLi = $('.banner-manage');
         bannerManageLi.addClass('unfold').siblings().removeClass('unfold');
+    } else if (url.indexOf('cmsmanger') >= 0) {
+        var zhiwenLi = $('.zhiwen-li');
+        zhiwenLi.addClass('unfold').siblings().removeClass('unfold');
+        zhiwenLi.children('.subnav').children().eq(0).addClass('active').siblings().removeClass('active');
+    } else if (url.indexOf('cmsmanger') >= 0) {
+        var zhiwenLi = $('.zhiwen-li');
+        zhiwenLi.addClass('unfold').siblings().removeClass('unfold');
+        zhiwenLi.children('.subnav').children().eq(1).addClass('active').siblings().removeClass('active');
+    } else if (url.indexOf('cmsmanger') >= 0) {
+        var zhiwenLi = $('.zhiwen-li');
+        zhiwenLi.addClass('unfold').siblings().removeClass('unfold');
+        zhiwenLi.children('.subnav').children().eq(2).addClass('active').siblings().removeClass('active');
     }
 });

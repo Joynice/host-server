@@ -4,7 +4,7 @@ __author__ = 'Joynice'
 主要存放资产模型
 '''
 from exts import db
-
+import datetime
 
 
 class Asset(db.Model):
@@ -34,6 +34,7 @@ class Cms_fingerprint(db.Model):
     name = db.Column(db.String(100), nullable=False)
     re = db.Column(db.String(100))
     md5 = db.Column(db.String(255))
+    create_time = db.Column(db.DateTime, default=datetime.datetime.now)
     hit_num = db.Column(db.Integer, default=0, nullable=False)
 
 

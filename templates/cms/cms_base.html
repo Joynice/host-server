@@ -9,6 +9,7 @@
     {% include 'common/_head.html' %}
     <link rel="stylesheet" href="{{ static('cms/css/base.css')}}">
     <script src="{{static('cms/js/base.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     {% block head %}
 
     {% endblock %}
@@ -23,16 +24,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">牧羊人主机服务检测系统</a>
+            <a class="navbar-brand" href="#">牧羊犬主机服务检测系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">{{ g.cms_user.username }}<span> [{{ g.cms_user.roles[0].name }}]</span></a></li>
+          <li>
+              {% if not g.cms_user.avatar_path %}
+                  <img src="{{ g.cms_user.avatar() }}"
+                       style="width:40px;height: 40px; margin-right: 5px; border-radius:5px; margin-top: 5px" alt="{{ g.cms_user.username }}">
+              {% else %}
+                  <img src="{{ g.cms_user.avatar_path }}"
+                       style="width:40px;height: 40px; margin-right: 5px; border-radius:5px; margin-top: 5px" alt="{{ g.cms_user.username }}">
+              {% endif %}
+          </li>
+              <li>
+                  <a href="{{ url_for('admin.profile') }}">{{ g.cms_user.username }}<span> [{{ g.cms_user.roles[0].name }}]</span></a>
+              </li>
             <li><a href="{{ url_for('admin.logout') }}">注销</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="查找...">
-          </form>
         </div>
       </div>
     </nav>
@@ -41,7 +50,7 @@
       <div class="row">
           <div class="col-sm-3 col-md-2 sidebar">
               <ul class="nav-sidebar">
-                <li class="unfold"><a href="#">首页</a></li>
+                  <li class="unfold"><a href="{{ url_for('admin.index') }}">首页</a></li>
                 <li class="profile-li">
                     <a href="#">个人中心<span></span></a>
                     <ul class="subnav">
@@ -51,15 +60,21 @@
                     </ul>
                 </li>
 
-                <li class="nav-group post-manage"><a href="#">任务管理</a></li>
-                <li class="comments-manage"><a href="#">指纹库管理</a></li>
+                  <li class="nav-group post-manage"><a href="{{ url_for('admin.task') }}">任务管理</a></li>
+                  <li class="zhiwen-li">
+                      <a href="#">指纹管理<span></span></a>
+                      <ul class="subnav">
+                          <li><a href="{{ url_for('admin.cmsmanger') }}">CMS指纹</a></li>
+                          <li><a href="#">WEB指纹</a></li>
+                          <li><a href="#">主机指纹</a></li>
+                      </ul>
+                  </li>
                 <li class="board-manage"><a href="#">资产管理</a></li>
 
                 <li class="nav-group user-manage"><a href="#">管理员任务系统</a></li>
-                <li class="role-manage"><a href="#">用户管理</a></li>
+                  <li class="role-manage"><a href="{{ url_for('admin.monitor') }}">系统监控</a></li>
 
-                <li class="nav-group cmsuser-manage"><a href="#">CMS用户管理</a></li>
-                <li class="cmsrole-manage"><a href="#">用户组管理</a></li>
+                  <li class="nav-group cmsuser-manage"><a href="#">用户管理</a></li>
             </ul>
           </div>
           <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

@@ -9,10 +9,8 @@ def login_required(func):
     @wraps(func)
     def inner(*args, **kwargs):
         if config['development'].CMS_USER_ID in session:
-            print(123456)
             return func(*args, **kwargs)
         else:
-            print(2222222)
             return redirect(url_for('admin.login'))
     return inner
 

@@ -6,6 +6,7 @@ from wtforms.validators import Email, InputRequired, Length, Regexp, ValidationE
 from utils import zlcache
 from flask import g
 
+#登录验证
 class LoginForm(BaseForm):
     email = StringField(validators=[Email(message='请输入正确的邮箱格式'), InputRequired(message='请输入邮箱')])
     password = StringField(validators=[Length(6, 20, message='请输入正确格式的密码'), InputRequired(message='请输入密码')])
@@ -19,7 +20,7 @@ class LoginForm(BaseForm):
         if not graph_captcha_mem:
             raise ValidationError(message='图形验证码错误！')
 
-
+#重置邮箱验证
 class ResetEmailForm(BaseForm):
     email = StringField(validators=[Email(message='请输入正确的邮箱格式'), InputRequired(message='请输入邮箱')])
     captcha = StringField(validators=[Length(min=6, max=6, message='请输入正确格式的验证码'), InputRequired(message='请输入验证码')])
@@ -37,7 +38,46 @@ class ResetEmailForm(BaseForm):
         if user.email == email:
             raise ValidationError('不能使用相同的邮箱进行修改')
 
+#重置密码验证
 class ResetpwdForm(BaseForm):
     oldpwd = StringField(validators=[Length(6, 20, message='请输入正确格式的旧密码'), InputRequired(message='请输入旧密码')])
     newpwd = StringField(validators=[Length(6, 20, message='请输入正确格式的新密码'), InputRequired(message='请输入新密码')])
     newpwd2 = StringField(validators=[EqualTo('newpwd', message='确认密码必须和新密码保持一致'), InputRequired(message='请再次输入新密码')])
+
+
+#添加任务
+class AddTaskFoem(BaseForm):
+    url1 = StringField(validators=[InputRequired(message='请输入任务URL！')])
+    cycle = IntegerField()
+    number = IntegerField(validators=[InputRequired(message='请输入扫描次数！')])
+
+#更新任务
+class UpgradeTaskForm(BaseForm):
+    task_id = IntegerField(validators=[InputRequired(message='未传入任务ID')])
+    url1 = StringField(validators=[InputRequired(message='请输入任务URL！')])
+    cycle = IntegerField()
+    number = IntegerField(validators=[InputRequired(message='请输入扫描次数！')])
+
+#删除任务
+class DeleteTaskForm(BaseForm):
+    task_id = IntegerField(validators=[InputRequired(message='未传入任务ID')])
+
+#增加cms指纹
+class AddCmsForm(BaseForm):
+    url = StringField()
+    name = StringField(validators=[InputRequired(message='请输入CMS名称')])
+    re = StringField()
+    md5 = StringField()
+
+#更新cms指纹
+class UpgradeCmsForm(BaseForm):
+    cms_id = IntegerField(validators=[InputRequired(message='未传入ID')])
+    url = StringField()
+    name = StringField(validators=[InputRequired(message='请输入CMS名称')])
+    re = StringField()
+    md5 = StringField()
+
+#删除mcs指纹
+class DeleteCmsForm(BaseForm):
+    cms_id = IntegerField(validators=[InputRequired(message='未传入ID')])
+

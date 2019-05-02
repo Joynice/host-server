@@ -1,10 +1,13 @@
 {% extends 'cms/cms_base.html' %}
+{% from 'common/_macros.html' import static %}
 {% block title %}
     个人信息
 {% endblock %}
 
 {% block head %}
-
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/css/fileinput.min.css"/>
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/js/fileinput.min.js"></script>
+    <script src="{{ static('cms/js/profile.js') }}"></script>
 {% endblock %}
 
 {% block page_title %}
@@ -32,6 +35,15 @@
                 {% endfor %}
                 </td>
             </tr>
+            <tr style="margin-bottom: 10px">
+            <td style="padding-top: 15px">更换头像：</td>
+            <td>
+                <form id="uploadForm" class="avatar-input-form" method="POST"
+                      enctype="multipart/form-data" style="padding-left: 0; padding-right: 150px; padding-top: 5px">
+                    <input name="avatar_upload" type="file" class="file" data-show-preview="true"/>
+                </form>
+            </td>
+        </tr>
             <tr>
                 <td>权限：</td>
                 <td>
@@ -40,6 +52,25 @@
                     {% if not loop.last %}；{% endif %}
                 {% endfor %}
                 </td>
+            </tr>
+            <tr>
+                <td>当前登录IP：</td>
+                <td>{{ user_ip }}</td>
+            </tr>
+            <tr>
+                <td>Secret Key（用于API调用）：</td>
+                {% if user.secret_key %}
+                    <td>
+                        <span>{{ user.secret_key }}</span>
+                        <button class="btn btn-warning btn-xs edit-board-btn" id="upgrade" style="margin-left: 10px; margin-right: 5px">更新</button>
+                        <button class="btn btn-danger btn-xs delete-board-btn" id="down">删除</button>
+
+                    </td>
+                {% else %}
+                    <td id="1">
+                        <button class="btn btn-default btn-xs up-board-btn" id="up">生成</button>
+                    </td>
+                {% endif %}
             </tr>
             <tr>
                 <td>加入时间：</td>

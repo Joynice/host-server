@@ -49,13 +49,14 @@ class DevConfig(Config):
     REDIS_HOST = '127.0.0.1'
     REDIS_PORT = 6379
     REDIS_DB = 14
+    REDIS_MONITOR_DB = 15
     REDIS_USERNAME = ''
     REDIS_PASSWORD = ''
 
     #mysql配置
     MYSQL_HOST = '10.63.2.199'
     MYSQL_PORT = 3306
-    MYSQL_DATABASE = 'host_server_win'
+    MYSQL_DATABASE = 'host-server-win'
     MYSQL_USERNAME = 'Joynice'
     MYSQL_PASSWORD = 'liran123/'
 
@@ -78,6 +79,15 @@ class DevConfig(Config):
     MAIL_USERNAME = '1125365907@qq.com'
     MAIL_PASSWORD = 'fymamdgjrovehgcd'
     MAIL_DEFAULT_SENDER = '1125365907@qq.com'
+
+    #分页数量
+    BACK_COUNT = 15
+
+    #监控服务器ID
+    SERVER_ID = 1
+
+    #允许上传文件类型
+    ALLOWED_EXTENSIONS = ['pdf', 'png', 'jpg', 'jpeg', 'gif']
 
     #log设置
     @classmethod

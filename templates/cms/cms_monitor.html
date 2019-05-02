@@ -1,0 +1,172 @@
+{% extends 'cms/cms_base.html' %}
+{% from 'common/_macros.html' import static %}
+{% block title %}
+    服务器监控
+{% endblock %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script type="text/javascript" src="//cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
+    <!-- ECharts 3 引入 -->
+    <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
+{% endblock %}
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block main %}
+    <div id="main1" class="col-md-5 col-md-offset-0" style="height: 300px"></div>
+    <div id="main" class="col-md-6 col-md-offset-0" style="height: 300px"></div>
+
+    <script type="text/javascript">
+        var myliuliang = echarts.init(document.getElementById('main'));
+        var myChart = echarts.init(document.getElementById('main1'));
+        myliuliang.setOption(
+            {
+                title: {
+                    text: '网络监控走势图'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['下行流量', '上行流量', '总流量']
+                },
+                xAxis: {
+                    name: '时间',
+                    data: [],
+                },
+                yAxis: {name: '（  kb/s）'},
+                series: [
+                    {
+                        name: 'data_in',
+                        type: 'line',
+                        data: []
+                    },
+                    {
+                        name: 'data_out',
+                        type: 'line',
+                        data: []
+                    },
+                    {
+                        name: 'data_all',
+                        type: 'line',
+                        data: []
+                    },
+                ]
+            }
+        );
+        myChart.setOption({
+            title: {
+                text: '系统监控走势图'
+            },
+            tooltip: {},
+            legend: {
+                data: ['cpu', '内存']
+            },
+            xAxis: {
+                data: [],
+                name: '时间'
+            },
+            yAxis: {name: '（%）'},
+            series: [{
+                name: 'cpu',
+                type: 'line',
+                data: []
+            }, {
+                name: 'process',
+                type: 'line',
+                data: []
+            }
+            ]
+        });
+
+
+        var time = ["", "", "", "", "", "", "", "", "", ""],
+            cpu = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            process = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var min = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",],
+            data_in = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            data_out = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            data_all = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        //准备好统一的 callback 函数
+        var update_mychart = function (res) {
+            //res是json格式的response对象
+
+            // 隐藏加载动画
+            myChart.hideLoading();
+
+            // 准备数据
+            time.push(res.data[0]);
+            cpu.push(parseFloat(res.data[1]));
+            process.push(parseFloat(res.data[2]));
+            if (time.length >= 10) {
+                time.shift();
+                cpu.shift();
+                process.shift();
+                myChart.setOption({
+                    xAxis: {
+                        data: time
+                    },
+                    series: [{
+                        name: 'cpu', // 根据名字对应到相应的系列
+                        data: cpu
+                    }, {
+                        name: '内存',
+                        data: process
+                    }
+                    ]
+                });
+            }
+        };
+        var update_myliuliang = function (res) {
+            myliuliang.hideLoading();
+            min.push(res.data[0]);
+            data_in.push(parseFloat(res.data[3]));
+            data_out.push(parseFloat(res.data[4]));
+            data_all.push(parseFloat(res.data[5]));
+            if (min.length >= 14) {
+                min.shift();
+                data_in.shift();
+                data_out.shift();
+                data_all.shift();
+            }
+            myliuliang.setOption({
+                xAxis: {
+                    data: min
+                },
+                series: [{
+                    name: '下行流量',
+                    data: data_in
+                },
+                    {
+                        name: '上行流量',
+                        data: data_out
+                    },
+                    {
+                        name: '总流量',
+                        data: data_all
+                    }]
+            });
+        };
+
+        // 首次显示加载动画
+        myChart.showLoading();
+        myliuliang.showLoading();
+
+
+        // 建立socket连接，等待服务器“推送”数据，用回调函数更新图表
+        $(document).ready(function () {
+            namespace = '/test';
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+
+            socket.on('server_response', function (res) {
+                update_mychart(res);
+                update_myliuliang(res);
+            });
+
+        });
+
+    </script>
+{% endblock %}

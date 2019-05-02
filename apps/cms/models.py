@@ -5,6 +5,10 @@ import enum
 import datetime
 import shortuuid
 from werkzeug.security import generate_password_hash, check_password_hash
+from .filter import StringToInt
+import os
+sep = os.sep
+import random
 
 '''
 主要存放用户模型以及任务模型
@@ -35,10 +39,20 @@ class CMSPersmission(object):
     ALL_PERMISSON = 0b11111111
     #访问者权限
     VISITOR = 0b00000001
-    #下发任务
+    #管理自己任务
     POST = 0b00000010
     #管理所有任务
     MANAGER = 0b00000100
+    #指纹管理
+    FINGER = 0b00001000
+    #资产管理
+    ZCMANGAGE = 0b00010000
+    #管理员任务系统
+    ADMINTASK = 0b00100000
+    #服务器监控
+    SERVER = 0b01000000
+    #用户管理
+    USERMANGER = 0b10000000
 
 
 cms_role_user = db.Table(
@@ -58,13 +72,14 @@ class User(db.Model):
     _password = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(50), unique=True)
     realname = db.Column(db.String(20))
-    avatar = db.Column(db.String(100))
+    avatar_path = db.Column(db.String(100))
     signature = db.Column(db.String(100))
     gender = db.Column(
         db.Enum(str(GenderEnum.MALE), str(GenderEnum.FEMALE), str(GenderEnum.SECRET), str(GenderEnum.UNKNOW)),
         default=str(GenderEnum.UNKNOW))
     join_time = db.Column(db.DateTime, default=datetime.datetime.now)
-    tasks = db.relationship('Task', backref='user')
+    secret_key = db.Column(db.String(100))
+    tasks = db.relationship('Task', backref='user', lazy=True)
 
     def __init__(self, *args, **kwargs):
         if 'password' in kwargs:
@@ -99,6 +114,13 @@ class User(db.Model):
     @property
     def is_developer(self):
         return self.has_permission(CMSPersmission.ALL_PERMISSON)
+
+
+    def avatar(self):
+        print(sep + 'static' + sep + 'cms' + sep + 'img' + sep + 'default' + sep + random.choice(
+            os.listdir('./static/cms/img/default/')))
+        return sep + 'static' + sep + 'cms' + sep + 'img' + sep + 'default' + sep + random.choice(
+            os.listdir('./static/cms/img/default/'))
 
 
 
@@ -137,9 +159,9 @@ class Task(db.Model):
     def __init__(self, *args, **kwargs):
         if kwargs.get('number') > 1:
             self.next_time = ''
-            for i in range(1, kwargs.get('number') + 1):
-                print(i)
-                a = (datetime.datetime.now() + datetime.timedelta(days=(int((kwargs.get('cycle')) or 1) * i))).strftime(
+            print(kwargs.get('cycle'))
+            for i in range(1, kwargs.get('number')):
+                a = (datetime.datetime.now() + datetime.timedelta(days=(int(StringToInt(kwargs.get('cycle')) or 1) * i))).strftime(
                     '%Y-%m-%d %H:%M:%S')
                 if i != kwargs.get('number'):
                     self.next_time += str(a) + ','

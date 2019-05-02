@@ -11,7 +11,6 @@ def before_request():
     if config['development'].CMS_USER_ID in session:
         user_id = session.get(config['development'].CMS_USER_ID)
         user = User.query.get(user_id)
-        print(user)
         if user:
             g.cms_user = user
 

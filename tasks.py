@@ -37,3 +37,8 @@ celery = make_celery(app)
 def send_mail(subject, recipients, body):
     message = Message(subject=subject, recipients=recipients, body=body)
     email.send(message)
+
+
+'''
+celery启动: celery -A tasks.celery worker --pool=eventlet， 启动时保证与tasks.py同级
+'''

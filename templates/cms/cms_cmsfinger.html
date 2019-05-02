@@ -1,0 +1,97 @@
+{% extends 'cms/cms_base.html' %}
+{% from 'common/_macros.html' import static %}
+
+{% block title %}
+    CMS指纹管理
+{% endblock %}
+
+{% block head %}
+    <script src="{{ static('cms/js/cms.js') }}"></script>
+{% endblock %}
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block main %}
+    <div class="top-box">
+        <button class="btn btn-warning" style="float: right" id="modal">添加指纹</button>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>URL</th>
+            <th>名称</th>
+            <th>匹配（re）</th>
+            <th>匹配（md5）</th>
+            <th>创建时间</th>
+            <th>命中次数</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cms in cmss %}
+            <tr data-id="{{ cms.id }}" data-url='{{ cms.url }}' data-re="{{ cms.re }}" data-md5="{{ cms.md5 }} "
+                data-name="{{ cms.name }}">
+                <td>{{ cms.url }}</td>
+                <td>{{ cms.name }}</td>
+                <td>{{ cms.re }}</td>
+                <td>{{ cms.md5 }}</td>
+                <td>{{ cms.create_time }}</td>
+                <td>{{ cms.hit_num }}</td>
+                <td>
+                    <button class="btn btn-default btn-xs edit-cms-btn">编辑</button>
+                    <button class="btn btn-danger btn-xs delete-cms-btn">删除</button>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <div style="text-align: center">
+        {{ pagination.links }}
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="cms-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加指纹</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">URL：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="url" placeholder='CMS路径'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="name" placeholder="CMS名称(必填)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">re：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="re" placeholder="匹配(re)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">md5：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="md5" placeholder="匹配(md5)">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="save-cms-btn">完成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

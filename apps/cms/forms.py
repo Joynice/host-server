@@ -5,6 +5,7 @@ from wtforms import StringField, IntegerField
 from wtforms.validators import Email, InputRequired, Length, Regexp, ValidationError, EqualTo
 from utils import zlcache
 from flask import g
+from .models import User
 
 #登录验证
 class LoginForm(BaseForm):
@@ -15,7 +16,6 @@ class LoginForm(BaseForm):
 
     def validate_graph_captcha(self, field):
         graph_captcha = field.data
-        print(graph_captcha,11111111111111111111)
         graph_captcha_mem = zlcache.get(graph_captcha.lower())
         if not graph_captcha_mem:
             raise ValidationError(message='图形验证码错误！')
@@ -80,4 +80,43 @@ class UpgradeCmsForm(BaseForm):
 #删除mcs指纹
 class DeleteCmsForm(BaseForm):
     cms_id = IntegerField(validators=[InputRequired(message='未传入ID')])
+
+#添加用户
+class AddUserForm(BaseForm):
+    username = StringField(validators=[Regexp(r'.{2,20}', message='请输入正确格式的用户名！'), InputRequired(message='请输入用户名！')])
+    password = StringField(validators=[Regexp(r'[0-9a-zA-Z_\./]{6,20}', message='密码必须6-20位数字或字母之间'), InputRequired(message='请输入密码！')])
+    email_capt = StringField(validators=[Length(min=6, max=6, message='请输入正确格式的邮箱验证码'), InputRequired('请输入邮箱验证码')])
+    email = StringField(validators=[InputRequired(message='请输入邮箱地址！')])
+    role = StringField(validators=[InputRequired(message='请选择角色!')])
+
+    def validate_username(self, field):
+        username = field.data
+        user = User.query.filter_by(username=username).first()
+        if user:
+            raise ValidationError('该昵称已经被使用！')
+
+    def validate_email_capt(self, field):
+        captcha = field.data
+        email = self.email.data
+        captcha_cache = zlcache.get(email)
+        if not captcha_cache or captcha.lower() !=captcha_cache.lower():
+            raise ValidationError('邮箱验证码错误')
+#修改用户信息
+class UpdateUserForm(BaseForm):
+    user_id = StringField(validators=[InputRequired(message='没有改用户信息')])
+    username = StringField(validators=[Regexp(r'.{2,20}', message='请输入正确格式的用户名！'), InputRequired(message='请输入用户名！')])
+    email = StringField(validators=[InputRequired(message='请输入邮箱地址！')])
+    role = StringField(validators=[InputRequired(message='请选择角色!')])
+    email_capt = StringField()
+
+    def validate_email_capt(self, field):
+
+        captcha = field.data
+        if captcha:
+            email = self.email.data
+            captcha_cache = zlcache.get(email)
+            if not captcha_cache or captcha.lower() !=captcha_cache.lower():
+                raise ValidationError('邮箱验证码错误')
+        else:
+            pass
 

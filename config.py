@@ -23,7 +23,8 @@ class InfoFilter(logging.Filter):
 
 
 class Config:
-    SECRET_KEY = 'who am i'
+    # SECRET_KEY = 'who am i'
+    SECRET_KEY = os.urandom(24)
     DEBUG = True
 
     #log设置

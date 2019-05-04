@@ -2,7 +2,7 @@
 __author__ = 'Joynice'
 from .views import bp
 from config import config
-from flask import session, g
+from flask import session, g, redirect, url_for
 from .models import User, CMSPersmission
 
 
@@ -15,6 +15,7 @@ def before_request():
         if user:
             g.cms_user = user
             g.all_user = all_user
+
 
 @bp.context_processor
 def cms_context_processor():

@@ -1,11 +1,12 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
 import datetime
+import os
 import random
 import string
 import uuid
 from threading import Lock
-import os
+
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
 from flask_paginate import Pagination, get_page_parameter
 
@@ -13,11 +14,11 @@ from api import field
 from config import config
 from exts import db, socketio
 from models import Cms_fingerprint
-from utils import zlcache, rediscache
+from utils import zlcache, rediscache, avatar as user_avatar
 from .decorators import login_required, permission_required
 from .filter import StringToInt, IntToString, IntToStatus, StatusToString, NoneToString
 from .forms import LoginForm, ResetEmailForm, ResetpwdForm, UpgradeTaskForm, AddTaskFoem, DeleteTaskForm, \
-    UpgradeCmsForm, DeleteCmsForm, AddCmsForm
+    UpgradeCmsForm, DeleteCmsForm, AddCmsForm, AddUserForm, UpdateUserForm
 from .models import User, CMSPersmission, Task, CMSRole
 
 thread = None
@@ -85,9 +86,13 @@ def email_captcha():
     email = request.args.get('email')
     if not email:
         return field.params_error('请传递邮箱参数！')
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return field.params_error('该邮箱已经注册，请更换邮箱！')
     source = list(string.ascii_letters)
     source.extend(map(lambda x: str(x), range(0, 10)))
     captcha = "".join(random.sample(source, 6))
+    print(captcha)
     send_mail.delay('牧羊人邮箱验证码', [email], '您的验证码是：{}'.format(captcha))
     zlcache.set(email, captcha)
     return field.success()
@@ -313,6 +318,109 @@ def usermanger():
     }
     return render_template('cms/cms_usermanger.html', **context)
 
+
+# 添加用户
+@bp.route('adduser/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.USERMANGER)
+def adduser():
+    form = AddUserForm(request.form)
+    if form.validate():
+        username = form.username.data
+        password = form.password.data
+        email = form.email.data
+        role = form.role.data
+        avatar = user_avatar.GithubAvatarGenerator()
+        path = '../static/cms/img/user/' + email + '.png'
+        avatar.save_avatar(filepath='./static/cms/img/user/' + email + '.png')
+        user = User(username=username, password=password, email=email, avatar_path=path)
+        db.session.add(user)
+        db.session.commit()
+        Role = CMSRole.query.filter_by(name=role).first()
+        if Role:
+            Role.users.append(user)
+            db.session.commit()
+            return field.success(message='添加用户成功！')
+    else:
+        message = form.get_error()
+        return field.params_error(message=message)
+
+
+# 管理员管理key
+@bp.route('iskey/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.USERMANGER)
+def iskey():
+    user_id = request.form.get('user_id')
+    key = request.form.get('key')
+    user = User.query.get(user_id)
+    print(user_id, key)
+    if user:
+        if key == 'down':
+            user.is_api = 'ApiEnum.DOWN'
+        else:
+            user.is_api = 'ApiEnum.UP'
+        db.session.add(user)
+        db.session.commit()
+        return field.success()
+    else:
+        return field.params_error(message='没有改用户！')
+
+
+# 修改用户信息
+@bp.route('updateuser/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.USERMANGER)
+def updateuser():
+    form = UpdateUserForm(request.form)
+    if form.validate():
+        username = form.username.data
+        user_id = form.user_id.data
+        email = form.email.data
+        role = form.role.data
+        user = User.query.get(user_id)
+        pre_role = user.roles[0].name  # 原有的角色
+        if user:
+            user.username = username
+            user.email = email
+            db.session.add(user)
+            db.session.commit()
+
+            Role = CMSRole.query.filter_by(name=role).first()
+            Pre_Role = CMSRole.query.filter_by(name=pre_role).first()
+            if Role:
+                Pre_Role.users.remove(user)  # 删除原有的角色
+                Role.users.append(user)  # 增加新角色
+                db.session.commit()
+                return field.success(message='修改信息成功')
+        else:
+            return field.params_error(message='没有该用户！')
+    else:
+        message = form.get_error()
+        return field.params_error(message=message)
+
+
+# 禁用用户
+@bp.route('stopuser/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.USERMANGER)
+def stopuser():
+    user_id = request.form.get('user_id')
+    status = request.form.get('status')
+    if status == 'down':
+        is_use = 'UseEnum.UNUSE'
+    else:
+        is_use = 'UseEnum.USE'
+    user = User.query.get(user_id)
+    if user:
+        user.is_use = is_use
+        db.session.add(user)
+        db.session.commit()
+        return field.success()
+    else:
+        return field.params_error(message='没有该用户！')
+
+
 #登录
 class LoginView(views.MethodView):
     def get(self, message=None):
@@ -325,6 +433,8 @@ class LoginView(views.MethodView):
             password = form.password.data
             remember = form.remember.data
             user = User.query.filter_by(email=email).first()
+            if user.is_use == 'UseEnum.UNUSE':
+                return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
             if user and user.check_password(password):
                 session[config['development'].CMS_USER_ID] = user.id  # 保存用户登录信息
                 if remember:

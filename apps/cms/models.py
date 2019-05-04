@@ -42,6 +42,9 @@ class LoginEnum(enum.Enum):
     UP = 1
     DOWN = 0
 
+class UseEnum(enum.Enum):
+    USE = 1
+    UNUSE = 0
 
 class ApiEnum(enum.Enum):
     UP = 1
@@ -93,6 +96,7 @@ class User(db.Model):
     join_time = db.Column(db.DateTime, default=datetime.datetime.now)
     last_login_time = db.Column(db.DateTime, default=datetime.datetime.now())
     is_activate = db.Column(db.Enum(str(LoginEnum.UP), str(LoginEnum.DOWN)))
+    is_use = db.Column(db.Enum(str(UseEnum.USE), str(UseEnum.UNUSE)), default=str(UseEnum.USE))
     is_api = db.Column(db.Enum(str(ApiEnum.UP), str(ApiEnum.DOWN)), default=str(ApiEnum.UP))
     secret_key = db.Column(db.String(100))
     tasks = db.relationship('Task', backref='user', lazy=True)

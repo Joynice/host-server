@@ -1,19 +1,4 @@
 $(function () {
-    $("#modal").click(function () {
-        var dialog = $("#task-dialog");
-        var urlInput = dialog.find("input[name='url']");
-        var title = $("#myModalLabel");
-        var cycleInput = dialog.find("input[name='cycle']");
-        var numberInput = dialog.find("input[name='number']");
-        urlInput.val("");
-        cycleInput.val("");
-        numberInput.val("");
-        title.text("添加任务");
-        dialog.modal('show')
-    })
-});
-
-$(function () {
     $("#save-task-btn").click(function (event) {
         event.preventDefault();
         var self = $(this);
@@ -24,22 +9,18 @@ $(function () {
 
         var url1 = urlInput.val();
         var cycle = cycleInput.val();
-        var number= numberInput.val();
-        var submitType = self.attr("data-type");
+        var number = numberInput.val();
+
         var taskId = self.attr("data-id");
+        console.log(taskId, url1, cycle);
 
         if (!url1 || !number) {
             zlalert.alertInfoToast('缺少必要参数！');
             return;
         }
-        var url = '';
-        if (submitType == 'update') {
-            url = '/utask/';
-        } else {
-            url = '/atask/'
-        }
+
         zlajax.post({
-            'url': url,
+            'url': '/uadmintask/',
             'data': {
                 'url1': url1,
                 'cycle': cycle,
@@ -53,7 +34,7 @@ $(function () {
                     zlalert.alertSuccessToast(data['message']);
                     setTimeout(function () {
                         window.location.reload();
-                    },2000);
+                    }, 1000);
 
                 } else {
                     zlalert.alertInfo(data['message']);
@@ -66,7 +47,6 @@ $(function () {
         })
     })
 });
-
 $(function () {
     $(".edit-task-btn").click(function (event) {
         event.preventDefault();
@@ -89,7 +69,6 @@ $(function () {
         cycleInput.val(cycle);
         numberInput.val(number);
         title.text("修改任务");
-        saveBtn.attr("data-type", 'update');
         saveBtn.attr('data-id', tr.attr('data-id'));
     })
 });
@@ -104,25 +83,21 @@ $(function () {
             "msg": '您确定要删除该任务吗？',
             'confirmCallback': function () {
                 zlajax.post({
-                    'url': '/dtask/',
+                    'url': '/dadmintask/',
                     'data': {
                         'task_id': task_id,
                     },
                     'success': function (data) {
                         if (data['code'] == 200) {
                             zlalert.alertSuccessToast('删除成功');
-                            setTimeout(function () {
-                                window.location.reload();
-                            },1000);
-                        }
-                        else {
+                            window.location.reload();
+                        } else {
                             zlalert.alertInfo(data['message']);
                         }
                     },
                     'fail': function () {
                         zlalert.alertNetworkError();
                     }
-
 
                 })
             }

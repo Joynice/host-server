@@ -16,6 +16,7 @@ def restful_result(code, message, data):
 
 
 def success(message="", data=None):
+    print(data)
     return restful_result(code=HttpCode.ok, message=message, data=data)
 
 

@@ -120,3 +120,14 @@ class UpdateUserForm(BaseForm):
         else:
             pass
 
+#管理员更改任务
+class UpgradeAdminTaskForm(BaseForm):
+    task_id = IntegerField(validators=[InputRequired(message='未传入任务ID')])
+    url1 = StringField(validators=[InputRequired(message='请输入任务URL！')])
+    cycle = IntegerField()
+    number = IntegerField(validators=[InputRequired(message='请输入扫描次数！')])
+
+#管理员删除任务
+class DeleteAdminTaskForm(BaseForm):
+    task_id = IntegerField(validators=[InputRequired(message='未传入任务ID')])
+

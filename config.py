@@ -23,8 +23,8 @@ class InfoFilter(logging.Filter):
 
 
 class Config:
-    # SECRET_KEY = 'who am i'
-    SECRET_KEY = os.urandom(24)
+    SECRET_KEY = 'who am i'
+    # SECRET_KEY = os.urandom(24)
     DEBUG = True
 
     #log设置
@@ -128,10 +128,16 @@ class DevConfig(Config):
     CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
     CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
 
+#生产环境
+class ProConfig(Config):
+
+    SECRET_KEY = os.urandom(24)
+    DEBUG = False
+
 
 config = {
     'development': DevConfig,
     'testing': None,
-
+    'prodection': ProConfig,
     'default': DevConfig
 }

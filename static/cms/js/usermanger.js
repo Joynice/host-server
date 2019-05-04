@@ -242,3 +242,32 @@ $(function () {
        })
    })
 });
+
+$(function () {
+   $("#query").click(function (event) {
+       event.preventDefault();
+       var roleInput = $("#role");
+       if($("#or").is(':checked')){
+           var or = 1
+       }else {
+           or = 0
+       }
+       var role = roleInput.val();
+       zlajax.get({
+           'url': '/queryuser/',
+           'data':{
+               'role': role,
+               'or': or
+           },
+           'success': function (data) {
+               if(data['code']==200){
+                    var user_list = data['data']['user'];
+                    console.log(user_list);
+               }else {
+
+               }
+           }
+
+       })
+   })
+});

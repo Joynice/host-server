@@ -18,7 +18,7 @@ from utils import zlcache, rediscache, avatar as user_avatar
 from .decorators import login_required, permission_required
 from .filter import StringToInt, IntToString, IntToStatus, StatusToString, NoneToString
 from .forms import LoginForm, ResetEmailForm, ResetpwdForm, UpgradeTaskForm, AddTaskFoem, DeleteTaskForm, \
-    UpgradeCmsForm, DeleteCmsForm, AddCmsForm, AddUserForm, UpdateUserForm
+    UpgradeCmsForm, DeleteCmsForm, AddCmsForm, AddUserForm, UpdateUserForm, UpgradeAdminTaskForm, DeleteAdminTaskForm
 from .models import User, CMSPersmission, Task, CMSRole
 
 thread = None
@@ -176,9 +176,9 @@ def utask():
 @login_required
 @permission_required(CMSPersmission.POST)
 def dtask():
-    formm = DeleteTaskForm(request.form)
-    if formm.validate():
-        task_id = formm.task_id.data
+    form = DeleteTaskForm(request.form)
+    if form.validate():
+        task_id = form.task_id.data
         task = Task.query.get(task_id)
         if task:
             db.session.delete(task)
@@ -187,7 +187,7 @@ def dtask():
         else:
             return field.params_error(message='未找到该任务！')
     else:
-        message = formm.get_error()
+        message = form.get_error()
         return field.params_error(message=message)
 
 
@@ -419,6 +419,112 @@ def stopuser():
         return field.success()
     else:
         return field.params_error(message='没有该用户！')
+
+
+# 用户查询
+
+#TODO：数据传输问题
+@bp.route('queryuser/')
+@login_required
+@permission_required(CMSPersmission.USERMANGER)
+def queryuser():
+    name = request.args.get('role')
+    is_activate = request.args.get('or')
+    print(is_activate, type(is_activate))
+    user_list = []
+    if name:
+        role = CMSRole.query.filter_by(name=name).first()
+        if is_activate == '1':
+            for user in role.users:
+                if user.is_activate == 'LoginEnum.UP':
+                    user_list.append(user)
+            if len(user_list) ==0:
+                return field.success(message='没有找到符合条件的用户!')
+            return field.success(message='查询成功！', data={'user': user_list})
+        else:
+            return field.success(message='查询成功!', data={'user': role.users})
+    else:
+        if is_activate == '1':
+            print(1)
+            user = User.query.filter_by(is_activate='LoginEnum.UP').all()
+
+        else:
+            print(2)
+            user = User.query.filter_by(is_activate='LoginEnum.DOWN').all()
+        g.user = user
+        return field.success(message='查询成功！')
+
+#管理员任务管理
+@bp.route('admintask/')
+@login_required
+@permission_required(CMSPersmission.ADMINTASK)
+def admintask():
+    tasks = Task.query.all()
+    context = {
+        'tasks': tasks
+    }
+    return render_template('cms/cms_admintask.html', **context)
+
+#管理员更改任务
+@bp.route('uadmintask/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.ADMINTASK)
+def uadmintask():
+    form = UpgradeAdminTaskForm(request.form)
+    if form.validate():
+        task_id = form.task_id.data
+        cycle = form.cycle.data
+        number = form.number.data
+        url = form.url1.data
+        task = Task.query.get(task_id)
+        if task:
+            '''
+            TODO: 代码优化
+            '''
+            if number == 1:
+                task.next_time = None
+            else:
+                if number > 1:
+                    task.next_time = ''
+                    for i in range(1, number):
+                        a = (datetime.datetime.now() + datetime.timedelta(
+                            days=(int((cycle) or 1) * i))).strftime(
+                            '%Y-%m-%d %H:%M:%S')
+                        if i != number:
+                            task.next_time += str(a) + ','
+                        else:
+                            task.next_time += str(a)
+            task.cycle = IntToString(cycle)
+            task.url = url
+            task.number = number
+            db.session.add(task)
+            db.session.commit()
+            return field.success(message='更新任务成功')
+        else:
+            return field.params_error(message='未找到该任务')
+    else:
+        message = form.get_error()
+        return field.params_error(message=message)
+
+#管理员删除任务
+@bp.route('dadmintask/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.ADMINTASK)
+def dadmintask():
+    form = DeleteTaskForm(request.form)
+    if form.validate():
+        task_id = form.task_id.data
+        task = Task.query.get(task_id)
+        if task:
+            db.session.delete(task)
+            db.session.commit()
+            return field.success(message='删除任务成功')
+        else:
+            return field.params_error(message='未找到该任务！')
+    else:
+        message = form.get_error()
+        return field.params_error(message=message)
+
 
 
 #登录

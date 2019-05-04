@@ -22,6 +22,10 @@ class HostServer(Resource):
         if secret_key:
             user = User.query.filter_by(secret_key=secret_key).first()
             if user:
+                if user.is_use == 'UseEnum.UNUSE':
+                    return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
+                if user.is_api == 'ApiEnum.DOWN':
+                    return field.unauth_error(message='该用户已经被禁用API，请联系超级管理员解决！')
                 if not task_id:
                     return field.params_error(message='参数缺失')
                 task = Task.query.filter_by(task_id=task_id).first()
@@ -48,6 +52,10 @@ class HostServer(Resource):
         if secret_key:
             user = User.query.filter_by(secret_key=secret_key).first()
             if user:
+                if user.is_use == 'UseEnum.UNUSE':
+                    return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
+                if user.is_api == 'ApiEnum.DOWN':
+                    return field.unauth_error(message='该用户已经被禁用API，请联系超级管理员解决！')
                 if url and cycle and number:
                     task = Task(url=url, cycle=str(cycle), number=number, user_id=user.id)
                     db.session.add(task)
@@ -81,6 +89,10 @@ class HostServer(Resource):
         if secret_key:
             user = User.query.filter_by(secret_key=secret_key).first()
             if user:
+                if user.is_use == 'UseEnum.UNUSE':
+                    return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
+                if user.is_api == 'ApiEnum.DOWN':
+                    return field.unauth_error(message='该用户已经被禁用API，请联系超级管理员解决！')
                 if not task_id:
                     return field.params_error(message='请传入更新ID')
                 if url or cycle or number:
@@ -111,6 +123,10 @@ class HostServer(Resource):
         if secret_key:
             user = User.query.filter_by(secret_key=secret_key).first()
             if user:
+                if user.is_use == 'UseEnum.UNUSE':
+                    return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
+                if user.is_api == 'ApiEnum.DOWN':
+                    return field.unauth_error(message='该用户已经被禁用API，请联系超级管理员解决！')
                 if not task_id:
                     return field.params_error(message='参数缺少')
                 task = Task.query.filter_by(task_id=task_id).first()
@@ -138,6 +154,10 @@ class Result(Resource):
         if secret_key:
             user = User.query.filter_by(secret_key=secret_key).first()
             if user:
+                if user.is_use == 'UseEnum.UNUSE':
+                    return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
+                if user.is_api == 'ApiEnum.DOWN':
+                    return field.unauth_error(message='该用户已经被禁用API，请联系超级管理员解决！')
                 if not result_id:
                     return field.params_error('参数缺失')
                 result1 = Task.query.filter_by(result_id=result_id).first()

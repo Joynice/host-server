@@ -31,17 +31,18 @@
                     <i class="icon icon-filter-arrow"></i>
                 </div>
                 <select name="filter">
+                    <option value="所有用户">所有用户</option>
                     {% for role in  roles %}
                         <option value="{{ role.name }}">{{ role.name }}</option>
                     {% endfor %}
                 </select>
             </div>
         </div>
-        <div class="checkbox" style="margin-left: 20px; margin-right: 20px">
-            <label>
-                <input type="checkbox" id="or"><span style="font-size: 17px">在线</span>
-            </label>
-        </div>
+{#        <div class="checkbox" style="margin-left: 20px; margin-right: 20px">#}
+{#            <label>#}
+{#                <input type="checkbox" id="or"><span style="font-size: 17px">在线</span>#}
+{#            </label>#}
+{#        </div>#}
 
         <button class="btn btn-primary" type="submit" id="query"
                 style="padding-top: 4px; padding-bottom: 4px; padding-right: 8px; padding-left: 8px; margin-left: 8px">
@@ -69,16 +70,14 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="table">
         {% for user in users %}
-            <tr id="user" data-id="{{ user.id }}" data-username="{{ user.username }}" data-email="{{ user.email }}" data-role="{{ user.roles[0].name }}" data-password="{{ user.password }}">
+            <tr id="user" data-id="{{ user.id }}" data-username="{{ user.username }}" data-email="{{ user.email }}"
+                data-role="{{ user.roles[0].name }}" data-or="{{ user.is_activate|UPORDOWN }}">
                 {% if not user.avatar_path %}
-                    <td style="margin-right: 10px; overflow: hidden"><img src="{{ user.avatar() }}"
-                                                                          style="width:30px;height: 30px; padding-left: 20px; border-radius:5px; margin-top: 5px"
-                                                                          alt="{{ user.username }}"></td>
+                    <td style="margin-right: 10px; overflow: hidden"><img src="{{ user.avatar() }}" style="width:30px;height: 30px; padding-left: 20px; border-radius:5px; margin-top: 5px" alt="{{ user.username }}"></td>
                 {% else %}
-                    <td style="margin-right: 10px; overflow: hidden"><img src="{{ user.avatar_path }}"
-                                                                          alt="{{ user.name }}" style="width:30px;height: 30px;
+                    <td style="margin-right: 10px; overflow: hidden"><img src="{{ user.avatar_path }}" alt="{{ user.name }}" style="width:30px;height: 30px;
             ; border-radius:5px; margin-top: 5px"></td>
                 {% endif %}
                 <td>{{ user.username }}</td>

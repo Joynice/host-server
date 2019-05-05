@@ -133,6 +133,7 @@ $(function () {
         var tr = self.parent().parent();
         var user_id = tr.attr('data-id');
         var key = self.attr('value');
+        tr.attr('class','in_user');
         console.log(user_id, key);
         if (key == 'down') {
             var text = '禁用'
@@ -152,7 +153,7 @@ $(function () {
                             if (data['code'] == 200) {
                                 zlalert.alertSuccessToast(text + '成功！');
                                 setTimeout(function () {
-                                    window.location.reload();
+                                    $(".in_user").load(location.href+".in_user")
                                 }, 1000);
                             } else {
                                 zlalert.alertInfo(data['message']);
@@ -226,10 +227,10 @@ $(function () {
                     },
                     'success':function (data) {
                         if(data['code']==200){
+                            zlalert.alertSuccessToast(text+'成功！');
                             setTimeout(function () {
-                                zlalert.alertSuccessToast(text+'成功！')
+                               window.location.reload();
                             },1000);
-                            window.location.reload();
                         }else {
                             zlalert.alertInfoToast(data['message']);
                         }
@@ -246,28 +247,33 @@ $(function () {
 $(function () {
    $("#query").click(function (event) {
        event.preventDefault();
+
        var roleInput = $("#role");
        if($("#or").is(':checked')){
-           var or = 1
+           var or = '在线'
        }else {
-           or = 0
+           or = '所有'
        }
+
        var role = roleInput.val();
-       zlajax.get({
-           'url': '/queryuser/',
-           'data':{
-               'role': role,
-               'or': or
-           },
-           'success': function (data) {
-               if(data['code']==200){
-                    var user_list = data['data']['user'];
-                    console.log(user_list);
-               }else {
+       if(role ==''){
+           zlalert.alertInfoToast('请选择角色！');
+           return;
+       }
+       $("#table tr").each(function () {
+           var tr = $(this).children();
+           var user_role = tr[2].innerText;
+           console.log(role);
+           $(this).hide();
+          if (role==user_role){
+                  $(this).show();
+                  zlalert.alertSuccessToast('查询成功！');
+              }
+          if (role=='所有用户'){
+              window.location.reload()
+          }
 
-               }
-           }
+       });
 
-       })
    })
 });

@@ -42,8 +42,6 @@ class HostServer(Resource):
         下发任务
         :return:
         '''
-        # from tasks import cms
-        from WebServer.Cms import WebCms
         args = HostServerPost_parse.parse_args()
         url = args.get('url')
         cycle = args.get('cycle')
@@ -65,8 +63,6 @@ class HostServer(Resource):
                         return field.params_error(message='创建任务失败!')
                     task_id = task.task_id
                     result_id = task.result_id
-                    if number == 1:
-                        WebCms(desurl=url).RunIt()
                     return field.success(message='任务成功，结果请自己查询', data={'task_id': task_id, 'result_id': result_id})
                 else:
                     return field.params_error(message='参数缺失')

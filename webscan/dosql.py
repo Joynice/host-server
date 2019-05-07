@@ -2,7 +2,9 @@
 __author__ = 'Joynice'
 
 import pymysql
+
 from config import config
+
 config = config['development']
 
 class Mysql(object):
@@ -12,6 +14,7 @@ class Mysql(object):
         self.username = username
         self.password = password
         self.db = pymysql.connect(host, username, password, db)
+        self.cursor = self._create_cursor()
 
     #创建游标
     def _create_cursor(self):
@@ -31,13 +34,12 @@ class Mysql(object):
             sql = "SELECT {} FROM {}".format(obj, table)
         else:
             sql = "SELECT {} FROM {} WHERE {}".format(obj, table, factor)
-        cursor = self._create_cursor()
         try:
-            cursor.execute(sql)
+            self.cursor.execute(sql)
             if num=='all':
-                res = cursor.fetchall()
+                res = self.cursor.fetchall()
             else:
-                res = cursor.fetchone()
+                res = self.cursor.fetchone()
             return res
         except Exception as e:
             print(e)
@@ -58,8 +60,8 @@ class Mysql(object):
             else:
                 sql = 'UPDATE {} SET {} WHERE {}'.format(table, obj, factor)
             try:
-                cursor = self._create_cursor()
-                cursor.execute(sql)
+                self.db.ping(reconnect=True)
+                self.cursor.execute(sql)
                 self.db.commit()
                 self.closedb()
                 return 1
@@ -68,20 +70,43 @@ class Mysql(object):
                 self.closedb()
                 return 0
 
-    def delete(self, table='task', factor=''):
-        pass
+    # 删除数据
+    def delete(self, table='task', factor=None):
+        '''
+        :param table:表名
+        :param factor: 条件（默认无）
+        :return:
+        '''
+        if not factor:
+            sql = 'DELETE FROM {}'.format(table)
+        else:
+            sql = 'DELETE FROM {} WHERE {}'.format(table, factor)
+        try:
+            self.db.ping(reconnect=True)
+            self.cursor.execute(sql)
+            self.db.commit()
+        except:
+            self.db.rollback()
+        self.closedb()
 
-
-
-
-
-
-
+    def sql(self, sql):
+        if sql:
+            try:
+                self.db.ping(reconnect=True)
+                self.cursor.execute(sql)
+                self.db.commit()
+            except Exception as e:
+                print(e)
+                print(sql)
+                self.db.rollback()
+            self.closedb()
 
     #关闭会话
     def closedb(self):
         self.db.close()
 
+if __name__ == '__main__':
+    pass
 
 
 

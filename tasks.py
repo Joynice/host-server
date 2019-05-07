@@ -29,10 +29,6 @@ def make_celery(app):
 celery = make_celery(app)
 
 
-# @celery.task
-# def cms(url):
-#     WebCms(desurl=url).RunIt()
-
 @celery.task
 def send_mail(subject, recipients, body):
     message = Message(subject=subject, recipients=recipients, body=body)

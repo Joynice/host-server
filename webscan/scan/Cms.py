@@ -1,5 +1,7 @@
 from gevent import monkey; monkey.patch_all(thread=False)
 import gevent
+from requests.packages.urllib3.util.ssl_ import create_urllib3_context
+create_urllib3_context()
 import os
 import json
 import hashlib

@@ -173,7 +173,7 @@ class Task(db.Model):
     state = db.Column(db.Enum(str(State.WAIT_SCAN), str(State.ING_SCAN), str(State.FINISH_SCAN)),
                       default=str(State.WAIT_SCAN))
     result = db.Column(db.Text, nullable=True)
-    html = db.Column(db.Text, nullable=True)
+    cms_result = db.Column(db.Text, nullable=True)
     user_id = db.Column(db.String(100), db.ForeignKey('user.id'))
 
     def __init__(self, *args, **kwargs):

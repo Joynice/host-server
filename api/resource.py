@@ -7,7 +7,7 @@ from . import field
 from .parse import HostServerPost_parse, HostServerDelete_parse, HostServerGet_parse, HostServerUpgrade_parse, \
     ResultGet_parse
 from exts import db
-
+from webscan.scan.cmstest import buildPayload
 
 class HostServer(Resource):
 
@@ -63,7 +63,10 @@ class HostServer(Resource):
                         return field.params_error(message='创建任务失败!')
                     task_id = task.task_id
                     result_id = task.result_id
-                    return field.success(message='任务成功，结果请自己查询', data={'task_id': task_id, 'result_id': result_id})
+                    if number == 1:
+                        task.state = 'State.ING_SCAN'
+                        buildPayload.delay(url=url, taskid=task_id)
+                    return field.success(message='下发任务成功，结果请稍后查询', data={'task_id': task_id, 'result_id': result_id})
                 else:
                     return field.params_error(message='参数缺失')
             else:

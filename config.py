@@ -51,6 +51,7 @@ class DevConfig(Config):
     REDIS_PORT = 6379
     REDIS_DB = 14
     REDIS_MONITOR_DB = 15
+    SCAN_DB = 13
     REDIS_USERNAME = ''
     REDIS_PASSWORD = ''
 
@@ -124,9 +125,13 @@ class DevConfig(Config):
         # apps.logger.addHandler(file_handler_warning)
 
 
-    # celery相关的配置
+    # app_celery相关的配置
     CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
     CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
+    #scan_celery相关配置
+    SCAN_CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, SCAN_DB)
+    SCAN_CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, SCAN_DB)
+
 
 #生产环境
 class ProConfig(Config):

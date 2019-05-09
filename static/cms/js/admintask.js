@@ -89,8 +89,14 @@ $(function () {
                     },
                     'success': function (data) {
                         if (data['code'] == 200) {
-                            zlalert.alertSuccessToast('删除成功');
-                            window.location.reload();
+                            setTimeout(function () {
+                                zlalert.alertSuccessToast('删除成功!')
+                            },2000);
+
+                            setTimeout(function () {
+                                window.location.reload();
+                            },3000);
+
                         } else {
                             zlalert.alertInfo(data['message']);
                         }

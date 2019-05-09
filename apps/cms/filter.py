@@ -16,7 +16,7 @@ def StringToInt(Str):
         return '等待扫描'
     elif Str == 'State.ING_SCAN':
         return '正在扫描'
-    elif Str == 'State.FINSH_SCAN':
+    elif Str == 'State.FINISH_SCAN':
         return '完成扫描'
 
 def IntToString(Int):

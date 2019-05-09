@@ -9,7 +9,7 @@ from .models import User
 
 #登录验证
 class LoginForm(BaseForm):
-    email = StringField(validators=[Email(message='请输入正确的邮箱格式'), InputRequired(message='请输入邮箱')])
+    email = StringField(validators=[InputRequired('请输入邮箱或者用户名')])
     password = StringField(validators=[Length(6, 20, message='请输入正确格式的密码'), InputRequired(message='请输入密码')])
     graph_captcha = StringField(validators=[Regexp(r'\w{4}', message='请输入正确格式的图形验证码！'), InputRequired(message='请输入验证码')])
     remember = IntegerField()
@@ -43,6 +43,18 @@ class ResetpwdForm(BaseForm):
     oldpwd = StringField(validators=[Length(6, 20, message='请输入正确格式的旧密码'), InputRequired(message='请输入旧密码')])
     newpwd = StringField(validators=[Length(6, 20, message='请输入正确格式的新密码'), InputRequired(message='请输入新密码')])
     newpwd2 = StringField(validators=[EqualTo('newpwd', message='确认密码必须和新密码保持一致'), InputRequired(message='请再次输入新密码')])
+
+#修改用户名
+class UusernameForm(BaseForm):
+    username = StringField(validators=[Regexp(r'.{2,20}', message='请输入正确格式的用户名！'), InputRequired(message='请输入用户名！')])
+    def validate_username(self, field):
+        username = field.data
+        if username == g.cms_user.username:
+            raise ValidationError('不能使用重复昵称！')
+        user = User.query.filter_by(username=username).first()
+        if user:
+            raise ValidationError('该昵称已经被使用！')
+
 
 
 #添加任务

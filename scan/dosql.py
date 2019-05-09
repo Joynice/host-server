@@ -21,7 +21,7 @@ class Mysql(object):
         return self.db.cursor()
 
     #查询数据
-    def query(self, table='task', obj='*', factor=None, num='all'):
+    def query(self, table='task', obj='*', factor=None, num='all', order=None):
         '''
 
         :param table: 表名
@@ -31,10 +31,17 @@ class Mysql(object):
         :return: 查询结果
         '''
         if  not factor:
-            sql = "SELECT {} FROM {}".format(obj, table)
+            if not order:
+                sql = "SELECT {} FROM {}".format(obj, table)
+            else:
+                sql = "SELECT {} FROM {} ORDER BY {} DESC".format(obj, table,order)
         else:
-            sql = "SELECT {} FROM {} WHERE {}".format(obj, table, factor)
+            if not order:
+                sql = "SELECT {} FROM {} WHERE {}".format(obj, table, factor)
+            else:
+                sql = "SELECT {} FROM {} WHERE {} ORDER BY {} DESC".format(obj, table, factor, order)
         try:
+            print(sql)
             self.cursor.execute(sql)
             if num=='all':
                 res = self.cursor.fetchall()
@@ -106,7 +113,9 @@ class Mysql(object):
         self.db.close()
 
 if __name__ == '__main__':
-    pass
+    mysql = Mysql()
+    a = mysql.query(table='task', obj='state', factor='task_id="dz2UN5WxjwNBABGnmAm9nk"', num='one')
+    print(a)
 
 
 

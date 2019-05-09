@@ -140,7 +140,7 @@ class WebEye():
         self.discern()
 
     def title(self):
-        m = re.search(r"<title>(.*)</title>",self.content,flags=re.I)
+        m = re.search(r"<title>(.*?)</title>",self.content,flags=re.I)
         if m:
             return m.group(1)
         return ""

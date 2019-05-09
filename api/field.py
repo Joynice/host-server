@@ -33,3 +33,17 @@ def server_error(message=""):
 
 def method_error(message=''):
     return restful_result(code=HttpCode.methoderror, message=message, data=None)
+
+def result_parse(cms, web):
+    result = {}
+    try:
+        if cms:
+            cms_result = eval(cms).get('webdna')
+            result.update(cms=cms_result)
+        if web:
+            web_result = eval(web).get('other')
+            result.update(web=web_result)
+    except:
+        pass
+    return result
+

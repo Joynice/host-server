@@ -12,12 +12,14 @@
     <div class="top-box">
         <button class="btn btn-warning" style="float: right" id="modal">添加任务</button>
     </div>
+    <div style="overflow-x: auto; overflow-y: auto; height: 750px; width:1500px;">
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>任务ID</th>
                 <th>URL</th>
                 <th>创建时间</th>
+                <th>下发途径</th>
                 <th>周期(天)</th>
                 <th>次数</th>
                 <th>状态</th>
@@ -30,9 +32,15 @@
                     <td>{{ task.task_id }}</td>
                     <td><a href="{{ task.url }}" target="_blank">{{ task.url }}</a></td>
                     <td>{{ task.task_time }}</td>
+                    <td>{{ task.referer }}</td>
                     <td>{{ task.cycle|To }}</td>
                     <td>{{ task.number }}</td>
-                    <td>{{ task.state|To }}</td>
+                    <td>
+                        {{ task.state|To }}
+                        {% if task.state|To == '完成扫描' %}
+                            <button class=" btn btn-warning btn-xs result-btn">查看结果</button>
+                        {% endif %}
+                    </td>
                     <td>
                         <button class="btn btn-primary btn-xs edit-task-btn">编辑</button>
                         <button class="btn btn-danger btn-xs delete-task-btn">删除</button>
@@ -42,6 +50,7 @@
 
         </tbody>
     </table>
+    </div>
      <!-- Modal -->
     <div class="modal fade" id="task-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -76,6 +85,26 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary" id="save-task-btn">完成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#查看结果#}
+    <!-- Modal -->
+    <div class="modal fade" id="result-dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">结果</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>

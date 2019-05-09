@@ -14,8 +14,9 @@
 {% endblock %}
 
 {% block main %}
-<table class="table table-bordered">
-        <thead>
+    <div style="overflow-x: auto; overflow-y: auto; height: 750px; width:1500px;">
+        <table class="table table-bordered">
+            <thead>
             <tr>
                 <th>任务ID</th>
                 <th>创建人</th>
@@ -46,6 +47,7 @@
 
         </tbody>
     </table>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="task-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

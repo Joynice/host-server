@@ -11,10 +11,10 @@ import time
 import builtwith
 import redis
 import requests
-from bson.objectid import ObjectId
+
 
 from config import config
-from scan_task import celery_app
+from web_scan_task import web_celery_app
 from .Waf_Server_Language import WebEye
 from ..dosql import Mysql
 
@@ -46,7 +46,6 @@ def success(tmp, taskid):
     # 1.插入成功信息到w11scan_config resutl表中
     mysql = Mysql()
     tmp['option'] = ('re' if tmp.get('re') !='' else 'md5')
-    print(tmp['option'])
     data = {
         "status": "success",
         "webdna": {
@@ -63,7 +62,6 @@ def success(tmp, taskid):
 
     # 2. 更新指纹命中率
     dnaid = tmp.get('id')
-    print(dnaid)
     mysql.sql("UPDATE `cms_fingerprint` SET `hit_num`=`hit_num`+1 WHERE `id` = '{}'".format(dnaid))
 
 
@@ -77,7 +75,7 @@ class whatweb(object):
         self.cms_hash_list = {}
 
     def buildPayload(self):
-        collections = self.mysql.query(table='cms_fingerprint')
+        collections = self.mysql.query(table='cms_fingerprint', order='hit_num')
         path_cache_hit = []
         for i in collections:
             try:
@@ -114,7 +112,7 @@ class whatweb(object):
         for item in pathL + pathList:
             if item[0] not in combine:
                 combine.append(item[0])
-        print(AverageSplit(combine, 10))
+        # print(AverageSplit(combine, 10))
         return AverageSplit(combine,10)
 
     def run(self):
@@ -204,7 +202,7 @@ class WhatScan(object):
         return self.result
 
 
-@celery_app.task
+@web_celery_app.task
 def otherscan(url, taskid):
     res = WebEye(url)
     res.run()
@@ -225,8 +223,8 @@ def otherscan(url, taskid):
     Mysql().sql("UPDATE `TASK` SET `state`='State.FINISH_SCAN', `result`=\"{}\" WHERE `task_id`='{}'".format(str(data), taskid))
 
 
-@celery_app.task
-def buildPayload(url, taskid):
+@web_celery_app.task
+def web_scan(url, taskid):
     what = whatweb(url)
     redisConn.set(url, "1", ex=60 * 60 * 24)
     wli = what.run()
@@ -236,7 +234,7 @@ def buildPayload(url, taskid):
     # other
 
 
-@celery_app.task
+@web_celery_app.task
 def singscan(url, ordict, taskid):
     value = redisConn.get(url)
     if value is None or value != "1":

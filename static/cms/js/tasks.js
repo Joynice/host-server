@@ -53,7 +53,7 @@ $(function () {
                     zlalert.alertSuccessToast(data['message']);
                     setTimeout(function () {
                         window.location.reload();
-                    },2000);
+                    }, 1000);
 
                 } else {
                     zlalert.alertInfo(data['message']);
@@ -110,10 +110,13 @@ $(function () {
                     },
                     'success': function (data) {
                         if (data['code'] == 200) {
-                            zlalert.alertSuccessToast('删除成功');
+                            setTimeout(function () {
+                                zlalert.alertSuccessToast('删除成功！');
+
+                            }, 2000);
                             setTimeout(function () {
                                 window.location.reload();
-                            },1000);
+                            }, 3000);
                         }
                         else {
                             zlalert.alertInfo(data['message']);
@@ -125,6 +128,30 @@ $(function () {
 
 
                 })
+            }
+        })
+    })
+});
+
+$(function () {
+    $(".result-btn").click(function (event) {
+        event.preventDefault();
+        var self = $(this);
+        var tr = self.parent().parent();
+        var task_id = tr.attr('data-id');
+        var dialog = $("#result-dialog");
+        dialog.modal("show");
+        zlajax.get({
+            'url': '/tresult/',
+            'data': {
+                'task_id': task_id
+            },
+            'success': function (data) {
+                if (data['code'] == 200) {
+                    console.log(data);
+                    var str = JSON.stringify(data['data']['result']);
+                    $('.modal-body').text(str);
+                }
             }
         })
     })

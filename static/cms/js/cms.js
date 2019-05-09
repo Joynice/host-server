@@ -118,8 +118,10 @@ $(function () {
                     },
                     'success': function (data) {
                         if (data['code'] == 200) {
-                            zlalert.alertSuccessToast('删除成功');
-                            window.location.reload();
+                            zlalert.alertSuccessToast('删除成功！');
+                            setTimeout(function () {
+                                window.location.reload()
+                            },1000);
                         } else {
                             zlalert.alertInfo(data['message']);
                         }

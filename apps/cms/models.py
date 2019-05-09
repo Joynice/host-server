@@ -174,7 +174,9 @@ class Task(db.Model):
                       default=str(State.WAIT_SCAN))
     result = db.Column(db.Text, nullable=True)
     cms_result = db.Column(db.Text, nullable=True)
+    host_result = db.Column(db.Text, nullable=True)
     user_id = db.Column(db.String(100), db.ForeignKey('user.id'))
+    referer = db.Column(db.String(100))
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('number') > 1:

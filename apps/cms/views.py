@@ -14,11 +14,15 @@ from api import field
 from config import config
 from exts import db, socketio
 from models import Cms_fingerprint
+from scan.hostscan.PortScan import host_scan
+from scan.webscan.Cms import web_scan
 from utils import zlcache, rediscache, avatar as user_avatar
+from utils.web_tools import match_url
 from .decorators import login_required, permission_required
 from .filter import StringToInt, IntToString, IntToStatus, StatusToString, NoneToString
 from .forms import LoginForm, ResetEmailForm, ResetpwdForm, UpgradeTaskForm, AddTaskFoem, DeleteTaskForm, \
-    UpgradeCmsForm, DeleteCmsForm, AddCmsForm, AddUserForm, UpdateUserForm, UpgradeAdminTaskForm, DeleteAdminTaskForm
+    UpgradeCmsForm, DeleteCmsForm, AddCmsForm, AddUserForm, UpdateUserForm, UpgradeAdminTaskForm, DeleteAdminTaskForm, \
+    UusernameForm
 from .models import User, CMSPersmission, Task, CMSRole
 
 thread = None
@@ -118,11 +122,18 @@ def atask():
     form = AddTaskFoem(request.form)
     if form.validate():
         url = form.url1.data
+        # TODO:改成前端验证
+        if not match_url(url=url):
+            return field.params_error(message='URL格式不正确！')
         cycle = form.cycle.data
         number = form.number.data
-        task = Task(url=url, cycle=IntToString(cycle), number=number, user_id=g.cms_user.id)
+        task = Task(url=url, cycle=IntToString(cycle), number=number, user_id=g.cms_user.id, referer='WEB')
         db.session.add(task)
         db.session.commit()
+        if number == 1:
+            task.state = 'State.ING_SCAN'
+            web_scan.delay(url=url, taskid=task.task_id)
+            host_scan.delay(url=url, taskid=task.task_id)
         return field.success(message='添加任务成功！')
     else:
         message = form.get_error()
@@ -140,12 +151,16 @@ def utask():
         cycle = form.cycle.data
         number = form.number.data
         url = form.url1.data
+        if not match_url(url=url):
+            return field.params_error(message='URL格式不正确！')
         task = Task.query.get(task_id)
         if task:
             '''
             TODO: 代码优化
             '''
             if number == 1:
+                web_scan.delay(url=url, taskid=task_id)
+                host_scan.delay(url=url, task_id=task_id)
                 task.next_time = None
             else:
                 if number > 1:
@@ -161,6 +176,7 @@ def utask():
             task.cycle = IntToString(cycle)
             task.url = url
             task.number = number
+            task.referer = 'WEB'
             db.session.add(task)
             db.session.commit()
             return field.success(message='更新任务成功')
@@ -181,6 +197,8 @@ def dtask():
         task_id = form.task_id.data
         task = Task.query.get(task_id)
         if task:
+            if task.state == 'State.ING_SCAN':
+                return field.params_error(message='任务正在进行中，无法删除！')
             db.session.delete(task)
             db.session.commit()
             return field.success(message='删除任务成功')
@@ -189,6 +207,26 @@ def dtask():
     else:
         message = form.get_error()
         return field.params_error(message=message)
+
+
+# 查询结果
+@bp.route('tresult/')
+@login_required
+@permission_required(CMSPersmission.POST)
+def tresult():
+    task_id = request.args.get('task_id')
+    if not task_id:
+        return field.params_error(message='没有传任务ID')
+    task = Task.query.get(task_id)
+    if task:
+        web_data = task.result
+        cms_data = task.cms_result
+        result = field.result_parse(cms_data, web_data)
+        return field.success(message='查询成功',
+                             data={'task_id': task.task_id, 'result_id': task.result_id, 'result': result})
+    else:
+        return field.params_error(message='没有该任务！')
+
 
 
 # cms指纹库管理
@@ -206,7 +244,8 @@ def cmsmanger():
                             per_page=config['development'].BACK_COUNT)
     context = {
         'cmss': cmss,
-        'pagination': pagination
+        'pagination': pagination,
+        'total': total
     }
     return render_template('cms/cms_cmsfinger.html', **context)
 
@@ -422,8 +461,7 @@ def stopuser():
 
 
 # 用户查询
-
-#TODO：数据传输问题
+#TODO：数据传输问题,已解决：使用前端查询，此路由以无用
 @bp.route('queryuser/')
 @login_required
 @permission_required(CMSPersmission.USERMANGER)
@@ -445,11 +483,8 @@ def queryuser():
             return field.success(message='查询成功!', data={'user': role.users})
     else:
         if is_activate == '1':
-            print(1)
             user = User.query.filter_by(is_activate='LoginEnum.UP').all()
-
         else:
-            print(2)
             user = User.query.filter_by(is_activate='LoginEnum.DOWN').all()
         g.user = user
         return field.success(message='查询成功！')
@@ -476,12 +511,15 @@ def uadmintask():
         cycle = form.cycle.data
         number = form.number.data
         url = form.url1.data
+        if not match_url(url=url):
+            return field.params_error(message='URL格式不正确！')
         task = Task.query.get(task_id)
         if task:
-            '''
-            TODO: 代码优化
-            '''
+            #TODO: 代码优化
             if number == 1:
+                web_scan.delay(url=url, taskid=task_id)
+                host_scan.delay(url=url, tasid=task_id)
+                task.state = 'State.ING_SCAN'
                 task.next_time = None
             else:
                 if number > 1:
@@ -511,11 +549,13 @@ def uadmintask():
 @login_required
 @permission_required(CMSPersmission.ADMINTASK)
 def dadmintask():
-    form = DeleteTaskForm(request.form)
+    form = DeleteAdminTaskForm(request.form)
     if form.validate():
         task_id = form.task_id.data
         task = Task.query.get(task_id)
         if task:
+            if task.state == 'State.ING_SCAN':
+                return field.params_error(message='任务正在进行中，无法删除！')
             db.session.delete(task)
             db.session.commit()
             return field.success(message='删除任务成功')
@@ -526,7 +566,6 @@ def dadmintask():
         return field.params_error(message=message)
 
 
-
 #登录
 class LoginView(views.MethodView):
     def get(self, message=None):
@@ -535,12 +574,13 @@ class LoginView(views.MethodView):
     def post(self):
         form = LoginForm(request.form)
         if form.validate():
-            email = form.email.data
+            email = form.email.data  # 邮箱或者用户名
             password = form.password.data
             remember = form.remember.data
-            user = User.query.filter_by(email=email).first()
-            if user.is_use == 'UseEnum.UNUSE':
-                return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
+            user = User.query.filter_by(email=email).first() or User.query.filter_by(username=email).first()
+            if user:
+                if user.is_use == 'UseEnum.UNUSE':
+                    return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
             if user and user.check_password(password):
                 session[config['development'].CMS_USER_ID] = user.id  # 保存用户登录信息
                 if remember:
@@ -576,6 +616,23 @@ class ResetEmail(views.MethodView):
             return field.success()
         else:
             return field.params_error(form.get_error())
+
+
+# 修改昵称
+@bp.route('uusername/', methods=['POST'])
+@login_required
+def uusername():
+    form = UusernameForm(request.form)
+    if form.validate():
+        username = form.username.data
+        user = g.cms_user
+        user.username = username
+        db.session.add(user)
+        db.session.commit()
+        return field.success()
+    else:
+        message = form.get_error()
+        return field.params_error(message=message)
 
 
 # 生成secretkey

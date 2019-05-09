@@ -51,7 +51,8 @@ class DevConfig(Config):
     REDIS_PORT = 6379
     REDIS_DB = 14
     REDIS_MONITOR_DB = 15
-    SCAN_DB = 13
+    WEB_SCAN_DB = 13
+    HOST_SCAN_DB = 12
     REDIS_USERNAME = ''
     REDIS_PASSWORD = ''
 
@@ -128,10 +129,12 @@ class DevConfig(Config):
     # app_celery相关的配置
     CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
     CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, REDIS_DB)
-    #scan_celery相关配置
-    SCAN_CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, SCAN_DB)
-    SCAN_CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, SCAN_DB)
-
+    #web_scan_celery相关配置
+    WEB_SCAN_CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, WEB_SCAN_DB)
+    WEB_SCAN_CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, WEB_SCAN_DB)
+    #host_scan_celery
+    HOST_SCAN_CELERY_BROKER_URL = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, HOST_SCAN_DB)
+    HOST_SCAN_CELERY_RESULT_BACKEND = 'redis://{}:{}/{}'.format(REDIS_HOST, REDIS_PORT, HOST_SCAN_DB)
 
 #生产环境
 class ProConfig(Config):

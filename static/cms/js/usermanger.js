@@ -151,10 +151,13 @@ $(function () {
                         },
                         'success': function (data) {
                             if (data['code'] == 200) {
-                                zlalert.alertSuccessToast(text + '成功！');
                                 setTimeout(function () {
-                                    $(".in_user").load(location.href+".in_user")
-                                }, 1000);
+                                    zlalert.alertSuccessToast(text + '成功！');
+                                },2000);
+                                setTimeout(function () {
+                                    window.location.reload()
+                                }, 3000);
+
                             } else {
                                 zlalert.alertInfo(data['message']);
                             }
@@ -227,10 +230,13 @@ $(function () {
                     },
                     'success':function (data) {
                         if(data['code']==200){
-                            zlalert.alertSuccessToast(text+'成功！');
                             setTimeout(function () {
-                               window.location.reload();
-                            },1000);
+                                zlalert.alertSuccessToast(text+'成功！');
+                            }, 2000);
+                            setTimeout(function () {
+                                window.location.reload();
+                            },3000);
+
                         }else {
                             zlalert.alertInfoToast(data['message']);
                         }
@@ -270,7 +276,11 @@ $(function () {
                   zlalert.alertSuccessToast('查询成功！');
               }
           if (role=='所有用户'){
-              window.location.reload()
+              zlalert.alertSuccessToast('查询成功！');
+              setTimeout(function () {
+                  window.location.reload()
+              },2000);
+
           }
 
        });

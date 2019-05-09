@@ -3,8 +3,8 @@ __author__ = 'Joynice'
 
 from config import config
 config = config['development']
-BROKER_URL = config.SCAN_CELERY_BROKER_URL
-CELERY_RESULT_BACKEND = config.SCAN_CELERY_RESULT_BACKEND
+BROKER_URL = config.WEB_SCAN_CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = config.WEB_SCAN_CELERY_RESULT_BACKEND
 
 BROKER_URL = BROKER_URL
 

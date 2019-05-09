@@ -114,3 +114,36 @@ $(function () {
         });
     });
 });
+
+//修改昵称
+$(function () {
+    $("#uusername").click(function (event) {
+        event.preventDefault();
+        zlalert.alertOneInput({
+            'title': '请输入',
+            'placeholder': '新的用户名',
+            'confirmCallback': function (inputValue) {
+                var username = inputValue;
+                zlajax.post({
+                    'url': '/uusername/',
+                    'data':{
+                        'username': username
+                    },
+                    'success':function (data) {
+                        if(data['code']==200){
+                            zlalert.alertSuccessToast('修改成功！');
+                            setTimeout(function () {
+                                window.location.reload();
+                            },1000)
+                        }else {
+                            zlalert.alertErrorToast(data['message']);
+                        }
+                    },
+                    'fail': function () {
+                        zlalert.alertNetworkError();
+                    }
+                })
+            }
+        })
+    })
+});

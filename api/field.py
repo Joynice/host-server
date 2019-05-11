@@ -34,16 +34,33 @@ def server_error(message=""):
 def method_error(message=''):
     return restful_result(code=HttpCode.methoderror, message=message, data=None)
 
-def result_parse(cms, web):
+
+def result_parse(cms, web, host):
     result = {}
-    try:
-        if cms:
-            cms_result = eval(cms).get('webdna')
-            result.update(cms=cms_result)
-        if web:
-            web_result = eval(web).get('other')
-            result.update(web=web_result)
-    except:
-        pass
+
+    if cms:
+        cms_result = eval(cms).get('webdna')
+        cmsname = cms_result.get('cmsname')
+        result.update(cms=cmsname)
+    if web:
+        web_result = eval(web).get('other')
+        if web_result:
+            web_server = web_result.get('web-servers') or web_result.get('other').get('Server')
+            programming_languages = web_result.get('programming-languages')
+            title = eval(web).get('title')
+            js = web_result.get('javascript-frameworks')
+            web_frameworks = web_result.get('web-frameworks')
+            result.update(web_server=web_server, programming_languages=programming_languages,title=title,js=js,web_frameworks=web_frameworks)
+    if host:
+        host_result = eval(host)
+        if len(host_result)>0:
+            ip = host_result[0].get('ip')
+            os = host_result[0].get('os')
+            port_list = []
+            for i in host_result:
+                port = i.get('port')
+                port_list.append(port)
+            result.update(ip=ip, os=os, port=port_list)
+
     return result
 

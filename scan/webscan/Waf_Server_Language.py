@@ -115,7 +115,7 @@ class WebEye():
     def __init__(self, url):
         self.target = url
         self.tasks = queue.Queue()
-        self.cms_list = set()
+        self.cms_list = {}
         self.read_config()
 
     def run(self):
@@ -173,17 +173,21 @@ class WebEye():
 
     def discern_from_header(self, name, key, reg):
         if "Server" in self.headers:
-            self.cms_list.add("Server:" + self.headers["Server"])
+            # self.cms_list.add("Server:" + self.headers["Server"])
+            self.cms_list.update(Server=self.headers['Server'])
         if "X-Powered-By" in self.headers:
-            self.cms_list.add("X-Powered-By:" + self.headers["X-Powered-By"])
+            # self.cms_list.add("X-Powered-By:" + self.headers["X-Powered-By"])
+            self.cms_list.update(X_Powered_By=self.headers['X-Powered-BY'])
         if key in self.headers and (re.search(reg, self.headers[key], re.I)):
-            self.cms_list.add(name)
+            # self.cms_list.add(name)
+            self.cms_list.update(name=name)
         else:
             pass
 
     def discern_from_index(self, name, reg):
         if re.search(reg, self.content, re.I):
-            self.cms_list.add(name)
+            # self.cms_list.add(name)
+            self.cms_list.update(name=name)
         else:
             pass
 
@@ -192,7 +196,8 @@ class WebEye():
             result = requests.get(self.target + key, timeout=15, verify=False)
             # time.sleep(0.5)
             if re.search(reg, result.content, re.I):
-                self.cms_list.add(name)
+                # self.cms_list.add(name)
+                self.cms_list.update(name=name)
             else:
                 pass
         except Exception as e:
@@ -205,7 +210,7 @@ def main():
     url = "https://www.zut.edu.cn"
     res = WebEye(url)
     res.run()
-    cms = list(res.cms_list)
+    cms = res.cms_list
     # ['X-Powered-By:PHP/5.4.45', 'Langeuage:php', 'Server:nginx']
     print(cms)
 

@@ -1,0 +1,127 @@
+{% extends 'cms/cms_base.html' %}
+{% from 'common/_macros.html' import static %}
+
+{% block head %}
+    <script src="{{ static('cms/js/addzc.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+    资产管理
+{% endblock %}
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block main %}
+    <div class="top-box">
+        <button class="btn btn-warning" style="float: right" id="modal">更新</button>
+    </div>
+    <div style="overflow-x: auto; overflow-y: auto; height: 750px; width:1520px;">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>URL</th>
+                <th>Title</th>
+                <th>IP</th>
+                <th>CMS</th>
+                <th>操作系统</th>
+                <th>开发语言</th>
+                <th>WEB服务器</th>
+                <th>WEB框架</th>
+                <th>JS框架</th>
+                <th>端口</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for zc in zcs %}
+                <tr data-id="{{ zc.id }}" data-url="{{ zc.url }}" data-other="{{ zc.ports }}">
+                    <td><a href="{{ zc.url }}" target="_blank">{{ zc.url }}</a></td>
+                    <td>{{ zc.title|Zero|Title }}</td>
+                    <td>{{ zc.ip|Zero }}</td>
+                    <td>{{ zc.cms|Zero }}</td>
+                    <td>{{ zc.operating_systems|Zero }}</td>
+                    <td>{{ zc.programming_languages|Zero }}</td>
+                    <td>{{ zc.web_servers|Zero }}</td>
+                    <td>{{ zc.web_framworks|Zero }}</td>
+                    <td>{{ zc.javascript_frameworks|Zero }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-xs show-zc-btn">显示</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-xs edit-zc-btn">编辑</button>
+                        <button class="btn btn-danger btn-xs delete-zc-btn">删除</button>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="zc-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">更改资产</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">资产类型：</label>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="AreaId" name="AreaId">
+                                    <option value="1" name="role">Title</option>
+                                    <option value="2" name="role">IP</option>
+                                    <option value="3" name="role">CMS</option>
+                                    <option value="4" name="role">操作系统</option>
+                                    <option value="5" name="role">开发语言</option>
+                                    <option value="6" name="role">WEB服务器</option>
+                                    <option value="7" name="role">WEB框架</option>
+                                    <option value="8" name="role">JS框架</option>
+                                    <option value="9">端口</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">更改:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="text"
+                                       placeholder="更换内容">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="save-zc-btn">完成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade show-dialog" id="show-dialog" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">其他</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="other-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -8,7 +8,7 @@ from .parse import HostServerPost_parse, HostServerDelete_parse, HostServerGet_p
 from exts import db
 from scan.webscan.Cms import web_scan
 from scan.hostscan.PortScan import host_scan
-from utils.web_tools import match_url
+from utils.web_tools import match_url, unabletouch
 
 class HostServer(Resource):
 
@@ -68,10 +68,13 @@ class HostServer(Resource):
                     task_id = task.task_id
                     result_id = task.result_id
                     if number == 1:
-                        task.state = 'State.ING_SCAN'
-                        web_scan.delay(url=url, taskid=task_id)
-                        host_scan.delay(url=url, taskid=task_id)
-                    return field.success(message='下发任务成功，结果请稍后查询', data={'task_id': task_id, 'result_id': result_id})
+                        if unabletouch(url=url):
+                            task.state = 'State.ING_SCAN'
+                            web_scan.delay(url=url, taskid=task_id)
+                            host_scan.delay(url=url, taskid=task_id)
+                            return field.success(message='下发任务成功，结果请稍后查询', data={'task_id': task_id, 'result_id': result_id})
+                        else:
+                            return field.params_error(message='该URL不可达！')
                 else:
                     return field.params_error(message='参数缺失')
             else:
@@ -110,10 +113,13 @@ class HostServer(Resource):
                         task.referer = 'API'
                         db.session.commit()
                         if task.number == 1:
-                            task.state = 'State.ING_SCAN'
-                            web_scan.delay(url=url, taskid=task_id)
-                            host_scan.delay(url=url, task_id=task_id)
-                        return field.success(message='更新任务成功！')
+                            if unabletouch(url=url or task.url):
+                                task.state = 'State.ING_SCAN'
+                                web_scan.delay(url=url, taskid=task_id)
+                                host_scan.delay(url=url, task_id=task_id)
+                                return field.success(message='更新任务成功！')
+                            else:
+                                return field.params_error(message='该URL不可达!')
                     else:
                         return field.params_error(message='没有找到该任务')
                 else:

@@ -1,6 +1,0 @@
-a = b'Starting Nmap 7.70 ( https://nmap.org ) at 2019-05-09 09:37 ?D1\xa8\xb2\xa1\xc0\xa8\xba\xa1\xc1?\xa8\xba\xa1\xc0??\r\nNmap scan report for jianshu.com (106.75.17.181)\r\nHost is up (0.027s latency).\r\nNot shown: 997 filtered ports\r\nPORT    STATE SERVICE  VERSION\r\n22/tcp  open  ssh      OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0)\r\n80/tcp  open  http     Tengine httpd\r\n443/tcp open  ssl/http Tengine httpd\r\nWarning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port\r\nAggressive OS guesses: Linux 3.2 - 3.8 (98%), Linux 3.8 (98%), Linux 3.1 - 3.2 (98%), Linux 2.6.32 (97%), Linux 3.11 - 4.1 (97%), Linux 4.4 (97%), IPFire 2.11 firewall (Linux 2.6.32) (97%), Linux 3.16 (97%), WatchGuard Fireware 11.8 (97%), Linux 3.18 (96%)\r\nNo exact OS matches for host (test conditions non-ideal).\r\nService Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel\r\n\r\nOS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .\r\nNmap done: 1 IP address (1 host up) scanned in 26.16 seconds\r\n'
-import re
-a = str(a, encoding='gbk')
-print(a)
-os = re.findall('\\r\\nService Info: (.*?)\\r\\n\\r\\nOS', a ,re.I)
-print(os)

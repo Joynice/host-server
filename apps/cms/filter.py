@@ -50,5 +50,18 @@ def NoneToString(none):
     else:
         pass
 
+def NoneToNone(none):
+    if none == 'None' or none==None:
+        return ''
+    else:
+        return none
+
+def TitleToShort(title):
+    if title:
+        if len(title)>=30:
+            return title[0:30] + '......'
+        else:
+            return title
+    return ''
 
 

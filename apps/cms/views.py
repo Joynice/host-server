@@ -13,16 +13,16 @@ from flask_paginate import Pagination, get_page_parameter
 from api import field
 from config import config
 from exts import db, socketio
-from models import Cms_fingerprint
+from models import Cms_fingerprint, Asset
 from scan.hostscan.PortScan import host_scan
 from scan.webscan.Cms import web_scan
 from utils import zlcache, rediscache, avatar as user_avatar
-from utils.web_tools import match_url
+from utils.web_tools import match_url, unabletouch
 from .decorators import login_required, permission_required
-from .filter import StringToInt, IntToString, IntToStatus, StatusToString, NoneToString
+from .filter import StringToInt, IntToString, IntToStatus, StatusToString, NoneToString, NoneToNone, TitleToShort
 from .forms import LoginForm, ResetEmailForm, ResetpwdForm, UpgradeTaskForm, AddTaskFoem, DeleteTaskForm, \
     UpgradeCmsForm, DeleteCmsForm, AddCmsForm, AddUserForm, UpdateUserForm, UpgradeAdminTaskForm, DeleteAdminTaskForm, \
-    UusernameForm
+    UusernameForm, UpgradeZcForm
 from .models import User, CMSPersmission, Task, CMSRole
 
 thread = None
@@ -130,11 +130,17 @@ def atask():
         task = Task(url=url, cycle=IntToString(cycle), number=number, user_id=g.cms_user.id, referer='WEB')
         db.session.add(task)
         db.session.commit()
-        if number == 1:
-            task.state = 'State.ING_SCAN'
-            web_scan.delay(url=url, taskid=task.task_id)
-            host_scan.delay(url=url, taskid=task.task_id)
-        return field.success(message='添加任务成功！')
+        if unabletouch(url=url): #检测url是否可以访问
+            print(1111)
+            if number == 1:
+                task.state = 'State.ING_SCAN'
+                web_scan.delay(url=url, taskid=task.task_id)
+                host_scan.delay(url=url, taskid=task.task_id)
+            return field.success(message='添加任务成功！')
+        else:#如果不能访问直接返回结果
+            task.state = 'State.FINISH_SCAN'
+            task.result = str({'status': 'finish','reason':'URL不可达,无法进行扫描'})
+            return field.success(message='添加任务完成！')
     else:
         message = form.get_error()
         return field.params_error(message=message)
@@ -160,12 +166,12 @@ def utask():
             '''
             if number == 1:
                 web_scan.delay(url=url, taskid=task_id)
-                host_scan.delay(url=url, task_id=task_id)
+                host_scan.delay(url=url, taskid=task_id)
                 task.next_time = None
             else:
                 if number > 1:
                     task.next_time = ''
-                    for i in range(1, number):
+                    for i in range(1, number+1):
                         a = (datetime.datetime.now() + datetime.timedelta(
                             days=(int((cycle) or 1) * i))).strftime(
                             '%Y-%m-%d %H:%M:%S')
@@ -221,12 +227,12 @@ def tresult():
     if task:
         web_data = task.result
         cms_data = task.cms_result
-        result = field.result_parse(cms_data, web_data)
+        host_data = task.host_result
+        result = field.result_parse(cms_data, web_data, host_data)
         return field.success(message='查询成功',
                              data={'task_id': task.task_id, 'result_id': task.result_id, 'result': result})
     else:
         return field.params_error(message='没有该任务！')
-
 
 
 # cms指纹库管理
@@ -524,7 +530,7 @@ def uadmintask():
             else:
                 if number > 1:
                     task.next_time = ''
-                    for i in range(1, number):
+                    for i in range(1, number+1):
                         a = (datetime.datetime.now() + datetime.timedelta(
                             days=(int((cycle) or 1) * i))).strftime(
                             '%Y-%m-%d %H:%M:%S')
@@ -561,6 +567,108 @@ def dadmintask():
             return field.success(message='删除任务成功')
         else:
             return field.params_error(message='未找到该任务！')
+    else:
+        message = form.get_error()
+        return field.params_error(message=message)
+
+#资产页面
+@bp.route('zc/')
+@login_required
+@permission_required(CMSPersmission.ZCMANGAGE)
+def zc():
+    zcs = Asset.query.all()
+    context = {
+        'zcs':zcs
+    }
+    return render_template('cms/cms_zc.html', **context)
+
+@bp.route('addzc/')
+@login_required
+@permission_required(CMSPersmission.ZCMANGAGE)
+def addzc():
+    flag = request.args.get('flag')
+    if flag == '1':
+        tasks = Task.query.filter_by(state='State.FINISH_SCAN', is_add=1).all()
+        number = 0
+        db_url_list = []
+        to_url_list = []
+        assets = Asset.query.all()
+        for asset in assets:
+            db_url_list.append(asset.url)
+        for task in tasks:
+            cms = task.cms_result
+            web = task.result
+            host = task.host_result
+            if task.result or task.host_result or task.cms_result:
+                result = field.result_parse(cms,web,host)
+                if result:
+                    try:
+                        if task.url not in db_url_list and task.url not in to_url_list:
+                            asert  = Asset(url=task.url, ip=result.get('ip'), title=result.get('title'), cms=result.get('cms'),operating_systems=str(result.get('os'))
+                                           , web_servers=str(result.get('web_server')), programming_languages=str(result.get('programming_languages')),web_frameworks=str(result.get('web_frameworks')),javascript_frameworks=str(result.get('js')), ports=str(result.get('port'))
+                                           , upgrade_time=datetime.datetime.now())
+                            db.session.add(asert)
+                            db.session.commit()
+                            number += 1
+                            to_url_list.append(task.url)
+                    except Exception as e:
+                        pass
+        return field.success(message='成功更新{}条资产！'.format(number))
+    else:
+        return field.params_error(message='没有接受到参数!')
+
+#删除资产
+@bp.route('deletezc/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.ZCMANGAGE)
+def deletezc():
+    zc_id = request.form.get('zc_id')
+    if zc_id:
+        asset = Asset.query.get(zc_id)
+        if asset:
+            db.session.delete(asset)
+            db.session.commit()
+            return field.success(message='删除成功！')
+        else:
+            return field.params_error(message='没有该条资产信息！')
+    return field.params_error(message='没有接受到参数！')
+
+#更新资产
+@bp.route('uzc/', methods=['POST'])
+@login_required
+@permission_required(CMSPersmission.ZCMANGAGE)
+def uzc():
+    form = UpgradeZcForm(request.form)
+    if form.validate():
+        zc_id = form.zc_id.data
+        type = form.type.data
+        text = form.text.data
+        asset = Asset.query.get(zc_id)
+        if asset:
+            if type == '1':
+                asset.title=text
+            elif type == '2':
+                asset.ip = text
+            elif type == '3':
+                asset.cms = text
+            elif type == '4':
+                asset.operating_systems = text
+            elif type == '5':
+                asset.programming_languages = text
+            elif type == '6':
+                asset.web_servers = text
+            elif type == '7':
+                asset.web_frameworks = text
+            elif type == '8':
+                asset.javascript_frameworks = text
+            else:
+                asset.ports = text
+            asset.upgrade_time = datetime.datetime.now()
+            db.session.add(asset)
+            db.session.commit()
+            return field.success('更新成功!')
+        return field.params_error(message='没有该资产信息')
+
     else:
         message = form.get_error()
         return field.params_error(message=message)
@@ -698,3 +806,5 @@ bp.add_url_rule('profile/', view_func=ProFileView.as_view('profile'))
 bp.add_app_template_filter(StringToInt, 'To')
 bp.add_app_template_filter(StatusToString, 'UPORDOWN')
 bp.add_app_template_filter(NoneToString, 'None')
+bp.add_app_template_filter(NoneToNone, 'Zero')
+bp.add_app_template_filter(TitleToShort, 'Title')

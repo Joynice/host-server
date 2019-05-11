@@ -92,6 +92,9 @@ class DevConfig(Config):
     #允许上传文件类型
     ALLOWED_EXTENSIONS = ['pdf', 'png', 'jpg', 'jpeg', 'gif']
 
+    #周期任务检测频率
+    CYCLE_SCAN_TIME = 10
+
     #log设置
     @classmethod
     def init_app(cls, app):

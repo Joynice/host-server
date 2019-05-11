@@ -139,7 +139,7 @@ $(function () {
         var self = $(this);
         var tr = self.parent().parent();
         var task_id = tr.attr('data-id');
-        var dialog = $("#result-dialog");
+        var dialog = $(".result-dialog");
         dialog.modal("show");
         zlajax.get({
             'url': '/tresult/',
@@ -150,7 +150,7 @@ $(function () {
                 if (data['code'] == 200) {
                     console.log(data);
                     var str = JSON.stringify(data['data']['result']);
-                    $('.modal-body').text(str);
+                    $('#result-body').text(str);
                 }
             }
         })

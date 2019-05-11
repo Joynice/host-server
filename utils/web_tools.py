@@ -1,5 +1,8 @@
 import re
 from urllib.request import urlparse
+from config import config
+import requests
+config = config['development']
 def match_url(url):
     pattern = re.match(r'(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?', url,
                        re.IGNORECASE)
@@ -29,5 +32,23 @@ def urlTodomain(url):
     if domain[0:4] == 'www.':
         domain = domain[4:]
     return domain
+
+def urlTosite(url):
+    parse_url = urlparse(url)
+    site = '{uri.netloc}'.format(uri=parse_url)
+    return site
+
+def unabletouch(url):
+    try:
+        print(url)
+        status = requests.get(url, headers=config.HRADER, timeout=5).status_code
+        if status==200:
+            return True
+        else:
+            return False
+    except:
+        return False
+
 if __name__ == '__main__':
-    a = urlTodomain('https://www.baidu.com/132165156')
+    a = unabletouch('https://cn.wordpress.org/')
+    print(a)

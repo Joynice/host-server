@@ -174,15 +174,16 @@ class Task(db.Model):
                       default=str(State.WAIT_SCAN))
     result = db.Column(db.Text, nullable=True)
     cms_result = db.Column(db.Text, nullable=True)
-    host_result = db.Column(db.Text, nullable=True)
+    host_result = db.Column(db.Text(16777216), nullable=True)
     user_id = db.Column(db.String(100), db.ForeignKey('user.id'))
     referer = db.Column(db.String(100))
+    is_add = db.Column(db.Integer, default=1, nullable=False)
 
     def __init__(self, *args, **kwargs):
         if kwargs.get('number') > 1:
             self.next_time = ''
             print(kwargs.get('cycle'))
-            for i in range(1, kwargs.get('number')):
+            for i in range(1, kwargs.get('number')+1):
                 a = (datetime.datetime.now() + datetime.timedelta(days=(int(StringToInt(kwargs.get('cycle')) or 1) * i))).strftime(
                     '%Y-%m-%d %H:%M:%S')
                 if i != kwargs.get('number'):

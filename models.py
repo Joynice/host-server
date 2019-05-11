@@ -13,22 +13,19 @@ class Asset(db.Model):
     '''
     __tablename__ = 'asset'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    blogs = db.Column(db.String(255))
-    font_scripts = db.Column(db.String(255))
     web_servers = db.Column(db.String(255))
     javascript_frameworks = db.Column(db.String(255))
     programming_languages = db.Column(db.String(255))
     web_frameworks = db.Column(db.String(255))
     operating_systems = db.Column(db.String(255))
-    mobile_frameworks = db.Column(db.String(255))
-    video_players = db.Column(db.String(255))
-    cdn = db.Column(db.String(255))
-    webapp = db.Column(db.String(255))
-    waf = db.Column(db.String(255))
     cms = db.Column(db.String(255))
     url = db.Column(db.String(255), unique=True)
+    ip = db.Column(db.String(255))
+    ports = db.Column(db.Text)
     title = db.Column(db.String(255))
+    other = db.Column(db.Text(16777216))
     upgrade_time = db.Column(db.DateTime, default=None)
+    statue = db.Column(db.Integer, default=0, nullable=False)
 
 
 class Cms_fingerprint(db.Model):

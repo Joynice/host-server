@@ -206,7 +206,7 @@ class WhatScan(object):
 def otherscan(url, taskid):
     res = WebEye(url)
     res.run()
-    cms = list(res.cms_list)
+    cms = res.cms_list
     title = res.title()
     try:
         build = builtwith.builtwith(url)

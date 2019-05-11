@@ -143,3 +143,8 @@ class UpgradeAdminTaskForm(BaseForm):
 class DeleteAdminTaskForm(BaseForm):
     task_id = IntegerField(validators=[InputRequired(message='未传入任务ID')])
 
+class UpgradeZcForm(BaseForm):
+    zc_id = IntegerField(validators=[InputRequired(message='未传入资产ID')])
+    type = StringField(validators=[InputRequired(message='未传入更改资产类型')])
+    text = StringField()
+

@@ -41,7 +41,6 @@ class Mysql(object):
             else:
                 sql = "SELECT {} FROM {} WHERE {} ORDER BY {} DESC".format(obj, table, factor, order)
         try:
-            print(sql)
             self.cursor.execute(sql)
             if num=='all':
                 res = self.cursor.fetchall()

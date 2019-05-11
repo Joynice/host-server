@@ -9,7 +9,7 @@ from flask_script import Manager
 from app import create_app
 from config import config
 from exts import db
-from models import Cms_fingerprint, TestWebsite
+from models import Cms_fingerprint, TestWebsite, Asset
 from apps.cms import models as cms_models
 from utils.avatar import GithubAvatarGenerator
 

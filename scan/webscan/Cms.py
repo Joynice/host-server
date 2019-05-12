@@ -12,7 +12,7 @@ import builtwith
 import redis
 import requests
 
-
+import pymysql
 from config import config
 from web_scan_task import web_celery_app
 from .Waf_Server_Language import WebEye
@@ -59,6 +59,7 @@ def success(tmp, taskid):
     }
 
     mysql.sql("UPDATE `task` SET `state`='State.FINISH_SCAN', `cms_result`=\"{}\" WHERE `task_id`='{}'".format(str(data), taskid))
+    print(2222222)
 
     # 2. 更新指纹命中率
     dnaid = tmp.get('id')
@@ -151,6 +152,7 @@ class WhatScan(object):
                 headers = {
                     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0"
                 }
+                self.domain = self.domain.strip('/')
                 new_url = self.domain + path
                 try:
                     r = requests.get(new_url, headers=headers)
@@ -204,10 +206,13 @@ class WhatScan(object):
 
 @web_celery_app.task
 def otherscan(url, taskid):
+
     res = WebEye(url)
     res.run()
     cms = res.cms_list
     title = res.title()
+    header = res.header()
+    body = res.body()
     try:
         build = builtwith.builtwith(url)
     except:
@@ -218,9 +223,14 @@ def otherscan(url, taskid):
     data = {
         "status": "finish",
         "other": build,
-        "title": title
+        "title": title,
+        "header": header,
+        'body': body,
     }
-    Mysql().sql("UPDATE `TASK` SET `state`='State.FINISH_SCAN', `result`=\"{}\" WHERE `task_id`='{}'".format(str(data), taskid))
+    Mysql().sql("UPDATE `TASK` SET `state`='State.FINISH_SCAN', `result`=\"{}\" WHERE `task_id`='{}'".format(pymysql.escape_string(str(data)), taskid))
+    print(111111)
+
+
 
 
 @web_celery_app.task

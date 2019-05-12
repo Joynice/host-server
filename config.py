@@ -66,6 +66,8 @@ class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, MYSQL_DATABASE)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_POOL_SIZE = 100
+    SQLALCHEMY_MAX_OVERFLOW = 20
 
     #指纹配置
     CMS_FINGERPRINT = os.path.join(os.getcwd(), 'fingerprint', 'cms-fingerprint')

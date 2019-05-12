@@ -140,10 +140,25 @@ class WebEye():
         self.discern()
 
     def title(self):
-        m = re.search(r"<title>(.*?)</title>",self.content,flags=re.I)
+        m = re.search(r"<title[^>]*>(.*?)</title>",self.content,flags=re.I) or re.search(r"<TITLE[^>]*>(.*?)</TITLE>",self.content, flags=re.I)
         if m:
             return m.group(1)
         return ""
+    def header(self):
+        header = self.headers
+        if header:
+            return header
+        else:
+            return ""
+    def body(self):
+        try:
+            body = re.search(r"<body[^>]*>(.*?)</body>", self.content,re.S|re.M) or re.search(r"<BODY[^>]*>(.*?)</BODY>", self.content, re.S|re.M)
+            if body:
+                return body.group(1).strip()
+            else:
+                return ""
+        except:
+            return ""
 
     def read_config(self):
         mark_list = []

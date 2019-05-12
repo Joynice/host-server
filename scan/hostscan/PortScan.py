@@ -35,6 +35,7 @@ class Nmap(object):
             open_ports = []
             document_tree = minidom.parse(self.resultpath)
             ip = document_tree.getElementsByTagName('address')[0].getAttribute('addr') or ''
+            print(ip)
             ports = document_tree.getElementsByTagName('port')
             if self.os=='':
                 os_purpose = document_tree.getElementsByTagName('osmatch')[0].getAttribute('name') or ''

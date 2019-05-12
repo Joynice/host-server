@@ -74,6 +74,8 @@ class HostServer(Resource):
                             host_scan.delay(url=url, taskid=task_id)
                             return field.success(message='下发任务成功，结果请稍后查询', data={'task_id': task_id, 'result_id': result_id})
                         else:
+                            db.session.delete(task)
+                            db.session.commit()
                             return field.params_error(message='该URL不可达！')
                 else:
                     return field.params_error(message='参数缺失')

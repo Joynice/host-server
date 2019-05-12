@@ -24,6 +24,8 @@ class Asset(db.Model):
     ports = db.Column(db.Text)
     title = db.Column(db.String(255))
     other = db.Column(db.Text(16777216))
+    header = db.Column(db.Text(16777216))
+    body = db.Column(db.Text(16777216))
     upgrade_time = db.Column(db.DateTime, default=None)
     statue = db.Column(db.Integer, default=0, nullable=False)
 

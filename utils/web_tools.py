@@ -41,8 +41,8 @@ def urlTosite(url):
 def unabletouch(url):
     try:
         print(url)
-        status = requests.get(url, headers=config.HRADER, timeout=5).status_code
-        if status==200:
+        status = requests.get(url, headers=config.HRADER, timeout=10, verify=False).status_code
+        if 200<=status<400:
             return True
         else:
             return False

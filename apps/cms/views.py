@@ -109,7 +109,7 @@ def email_captcha():
 def task():
     tasks = g.cms_user.tasks
     context = {
-        'tasks': tasks
+        'tasks': tasks,
     }
     return render_template('cms/cms_task.html', **context)
 
@@ -467,7 +467,6 @@ def stopuser():
 
 
 # 用户查询
-#TODO：数据传输问题,已解决：使用前端查询，此路由以无用
 @bp.route('queryuser/')
 @login_required
 @permission_required(CMSPersmission.USERMANGER)
@@ -578,7 +577,7 @@ def dadmintask():
 def zc():
     zcs = Asset.query.all()
     context = {
-        'zcs':zcs
+        'zcs':zcs,
     }
     return render_template('cms/cms_zc.html', **context)
 
@@ -606,7 +605,7 @@ def addzc():
                         if task.url not in db_url_list and task.url not in to_url_list:
                             asert  = Asset(url=task.url, ip=result.get('ip'), title=result.get('title'), cms=result.get('cms'),operating_systems=str(result.get('os'))
                                            , web_servers=str(result.get('web_server')), programming_languages=str(result.get('programming_languages')),web_frameworks=str(result.get('web_frameworks')),javascript_frameworks=str(result.get('js')), ports=str(result.get('port'))
-                                           , upgrade_time=datetime.datetime.now())
+                                           , upgrade_time=datetime.datetime.now(), header=str(result.get('header')), body=str(result.get('body')))
                             db.session.add(asert)
                             db.session.commit()
                             number += 1

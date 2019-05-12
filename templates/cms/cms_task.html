@@ -10,6 +10,7 @@
 {% endblock %}
 {% block main %}
     <div class="top-box">
+        <span style="font-size: 16px">当前共有：<font color="red">{{  tasks|length  }}</font> 个任务</span>
         <button class="btn btn-warning" style="float: right" id="modal">添加任务</button>
     </div>
     <div style="overflow-x: auto; overflow-y: auto; height: 750px; width:1500px;">

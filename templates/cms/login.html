@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>登录界面</title>
+    <title>观星资产后台管理</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     {#    <meta name="csrf-token" content="{{ csrf_token() }}">#}
     {% include 'common/_head.html' %}
@@ -11,6 +11,7 @@
     <script src="{{ static('common/zlparam.js') }}"></script>
     <script src="{{ static('cms/js/login.js') }}"></script>
     <link rel="stylesheet" href="{{ static('cms/css/login.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 </head>
 
@@ -18,7 +19,7 @@
       id="top-image">
 
 <div class="container wrap1" style="height:450px;">
-    <h2 class="mg-b20 text-center">牧羊犬主机服务探测</h2>
+    <h2 class="mg-b20 text-center">观星资产后台管理</h2>
     <div class="col-sm-8 col-md-5 center-auto pd-sm-50 pd-xs-20 main_content">
         <p class="text-center font16">用户登录</p>
         <form>

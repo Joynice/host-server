@@ -40,6 +40,7 @@ $(function () {
         }
         zlajax.post({
             'url': url,
+            'async': false,
             'data': {
                 'url1': url1,
                 'cycle': cycle,
@@ -105,6 +106,7 @@ $(function () {
             'confirmCallback': function () {
                 zlajax.post({
                     'url': '/dtask/',
+                    'async': false,
                     'data': {
                         'task_id': task_id,
                     },
@@ -141,8 +143,10 @@ $(function () {
         var task_id = tr.attr('data-id');
         var dialog = $(".result-dialog");
         dialog.modal("show");
+         $('#result-body').text("");
         zlajax.get({
             'url': '/tresult/',
+            'async': false,
             'data': {
                 'task_id': task_id
             },

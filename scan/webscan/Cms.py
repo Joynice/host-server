@@ -206,31 +206,31 @@ class WhatScan(object):
 
 @web_celery_app.task
 def otherscan(url, taskid):
-
-    res = WebEye(url)
-    res.run()
-    cms = res.cms_list
-    title = res.title()
-    header = res.header()
-    body = res.body()
     try:
-        build = builtwith.builtwith(url)
+        res = WebEye(url)
+        res.run()
+        cms = res.cms_list
+        title = res.title()
+        header = res.header()
+        body = res.body()
+        try:
+            build = builtwith.builtwith(url)
+        except:
+            build = {}
+        if cms:
+            build["other"] = cms
+
+        data = {
+            "status": "finish",
+            "other": build,
+            "title": title,
+            "header": header,
+            # 'body': body,
+        }
+        Mysql().sql("UPDATE `TASK` SET `state`='State.FINISH_SCAN', `result`=\"{}\" WHERE `task_id`='{}'".format(pymysql.escape_string(str(data)), taskid))
+        print(111111)
     except:
-        build = {}
-    if cms:
-        build["other"] = cms
-
-    data = {
-        "status": "finish",
-        "other": build,
-        "title": title,
-        "header": header,
-        'body': body,
-    }
-    Mysql().sql("UPDATE `TASK` SET `state`='State.FINISH_SCAN', `result`=\"{}\" WHERE `task_id`='{}'".format(pymysql.escape_string(str(data)), taskid))
-    print(111111)
-
-
+        Mysql().sql("UPDATE `TASK` SET `state`='State.FINISH_SCAN', `result`='' WHERE `task_id`='{}'".format(taskid))
 
 
 @web_celery_app.task

@@ -64,6 +64,7 @@ class HostServer(Resource):
                     try:
                         db.session.commit()
                     except Exception as e:
+                        db.session.rollback()
                         return field.params_error(message='创建任务失败!')
                     task_id = task.task_id
                     result_id = task.result_id

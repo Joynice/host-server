@@ -1,0 +1,86 @@
+{% from 'common/_macros.html' import static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>观星资产,予你所得</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'common/_head.html' %}
+    <script src="{{ static('front/js/index.js') }}"></script>
+    <script src="{{ static('front/js/lodash.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ static('front/css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<div class="ui">
+    <p class="zoom"><span class="zoom zoomin">+</span><span class="zoom zoomout">-</span></p>
+    <p class="zoomlevel"><span class="percent">100</span> % - (<span class="width"></span>px)(<span
+            class="height"></span>px)</p>
+    <p>Dead: <span class="dead">0</span></p>
+    <p>Alive: <span class="alive">0</span></p>
+    <p>Drawn: <span class="drawn">0</span></p>
+    <p><span class="fps">0</span> FPS</p>
+    <a class="save" href="" download="capture.png">Save</a>
+</div>
+<div id="top-image">
+    <div id="content" class="container center-block">
+        <div class="jumbotron">
+            <div class="container">
+                <h2 style="text-align: center; margin: 20px">观星资产&nbsp&nbsp&nbsp予你所得</h2>
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="请输入需要查询的资产的URL"
+                           aria-describedby="sizing-addon1" id="data">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="search">搜 索</button>
+                        </span>
+                </div>
+                <div class="input-group" style="float: right; padding-top: 10px"><a href="#" class="readerme"><font size="4"
+                                                                                                 color="white">高级搜索提示</font></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Modal -->
+    <div class="modal fade readerme-dialog" id="readerme-dialog" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">高级搜索提示</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="readerme-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade result-dialog" id="result-dialog" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">搜索结果：</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="result-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

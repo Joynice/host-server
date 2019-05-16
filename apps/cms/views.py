@@ -9,6 +9,8 @@ from threading import Lock
 
 from flask import Blueprint, views, render_template, request, session, redirect, url_for, g
 from flask_paginate import Pagination, get_page_parameter
+from pyecharts import Page, Pie
+from sqlalchemy import func
 
 from api import field
 from config import config
@@ -30,11 +32,91 @@ async_mode = None
 thread_lock = Lock()
 bp = Blueprint('admin', __name__, url_prefix='/')
 
+
+# web服务器数据
+def webserver(all_count):
+    asset_count = all_count
+    nginx_count = Asset.query.filter(func.lower(Asset.web_servers).contains('nginx')).count()
+    apache_count = Asset.query.filter(func.lower(Asset.web_servers).contains('apache')).count()
+    rump_count = Asset.query.filter(func.lower(Asset.web_servers).contains('rump')).count()
+    iis_count = Asset.query.filter(func.lower(Asset.web_servers).contains('iis')).count()
+    vmserver_count = Asset.query.filter(func.lower(Asset.web_servers).contains('vwebserver')).count()
+    other_count = asset_count - (nginx_count + apache_count + iis_count + vmserver_count + rump_count)
+    attr_server = ["Nginx", "Apache", "IIS", "RUMP", "VWebserver", "其他"]
+    value_server = [nginx_count, apache_count, iis_count, rump_count, vmserver_count, other_count]
+    pie = Pie("Web服务器使用情况")
+    pie.add("", attr_server, value_server, is_label_show=True, center=[50, 50])
+    return pie
+
+
+# 操作系统数据
+def webos():
+    linux_count = Asset.query.filter(func.lower(Asset.operating_systems).contains('linux')).count()
+    windows_count = Asset.query.filter(func.lower(Asset.operating_systems).contains('windows')).count()
+    apple_count = Asset.query.filter(func.lower(Asset.operating_systems).contains('apple')).count()
+    waf_count = Asset.query.filter(func.lower(Asset.operating_systems).contains('waf')).count() + Asset.query.filter(
+        func.lower(Asset.operating_systems).contains('firewall')).count()
+    attr_os = ["Linux", "Windows", "Apple", "Waf"]
+    value_os = [linux_count, windows_count, apple_count, waf_count]
+    pie = Pie("操作系统使用情况")
+    pie.add("", attr_os, value_os, is_label_show=True, center=[50, 50])
+    return pie
+
+
+# 开发语言
+def pl():
+    php_count = Asset.query.filter(func.lower(Asset.programming_languages).contains('php')).count()
+    java_count = Asset.query.filter(func.lower(Asset.programming_languages).contains('java')).count()
+    lua_count = Asset.query.filter(func.lower(Asset.programming_languages).contains('lua')).count()
+    attr_pl = ["JAVA", "PHP", "LUA"]
+    value_pl = [java_count, php_count, lua_count]
+    pie = Pie("开发语言使用情况")
+    pie.add("", attr_pl, value_pl, is_label_show=True, is_angleaxis_show=True, center=[50, 50])
+    return pie
+
+
+# JS框架
+def jsf():
+    jquery = Asset.query.filter(func.lower(Asset.javascript_frameworks).contains('jquery')).count()
+    right = Asset.query.filter(func.lower(Asset.javascript_frameworks).contains('right')).count()
+    Moderniz = Asset.query.filter(func.lower(Asset.javascript_frameworks).contains('modernizr')).count()
+    select2 = Asset.query.filter(func.lower(Asset.javascript_frameworks).contains('select')).count()
+    lightbox = Asset.query.filter(func.lower(Asset.javascript_frameworks).contains('lightbox')).count()
+    attr_jsf = ["jQuery", "RightJs", "Moderniz", "Select2", "LightBox"]
+    value_jsf = [jquery, right, Moderniz, select2, lightbox]
+    pie = Pie("JS框架使用情况")
+    pie.add("", attr_jsf, value_jsf, is_label_show=True, center=[50, 50])
+    return pie
+
+#cms
+def cms():
+    diguo = Asset.query.filter(func.lower(Asset.cms).contains('帝国')).count()
+    zhimeng = Asset.query.filter(func.lower(Asset.cms).contains('dede')).count()
+    shengda = Asset.query.filter(func.lower(Asset.cms).contains('盛大')).count()
+    wiki = Asset.query.filter(func.lower(Asset.cms).contains('hdwiki')).count()
+    thinkphp = Asset.query.filter(func.lower(Asset.cms).contains('thinkphp')).count()
+    Jee = Asset.query.filter(func.lower(Asset.cms).contains('jee')).count()
+    attr_cms = ['帝国CMS','织梦CMS','盛大CMS','HdWiki(中文维基)','ThinkPHP','JeeCMS']
+    value_cms = [diguo,zhimeng,shengda,wiki,thinkphp,Jee]
+    pie = Pie("CMS使用状况")
+    pie.add("", attr_cms, value_cms, is_label_show=True, center=[50,50])
+    return pie
+
 #首页
 @bp.route('admin/')
 @login_required
 def index():
-    return render_template('cms/cms_index.html')
+    asset_count = Asset.query.count()  # 总资产数
+    page = Page()  # 生成页面对象
+    # 生成服务器图
+    webserver_pie = webserver(asset_count)  # web服务器
+    os_pie = webos()  # 操作系统
+    pl_pie = pl()  # 开发语言
+    jsf_pie = jsf()  # js框架
+    cms_pie = cms()
+    page.add([webserver_pie, os_pie, pl_pie, jsf_pie, cms_pie])
+    return render_template('cms/cms_index.html', chart=page.render_embed(), host='/static/front/js', total=asset_count,
+                           script_list=page.get_js_dependencies())
 
 #注销
 @bp.route('logout/')
@@ -131,7 +213,6 @@ def atask():
         db.session.add(task)
         db.session.commit()
         if unabletouch(url=url): #检测url是否可以访问
-            print(1111)
             if number == 1:
                 task.state = 'State.ING_SCAN'
                 web_scan.delay(url=url, taskid=task.task_id)
@@ -229,6 +310,7 @@ def tresult():
         cms_data = task.cms_result
         host_data = task.host_result
         result = field.result_parse(cms_data, web_data, host_data)
+        print(result)
         return field.success(message='查询成功',
                              data={'task_id': task.task_id, 'result_id': task.result_id, 'result': result})
     else:
@@ -603,9 +685,13 @@ def addzc():
                 if result:
                     try:
                         if task.url not in db_url_list and task.url not in to_url_list:
+                            import pymysql
                             asert  = Asset(url=task.url, ip=result.get('ip'), title=result.get('title'), cms=result.get('cms'),operating_systems=str(result.get('os'))
-                                           , web_servers=str(result.get('web_server')), programming_languages=str(result.get('programming_languages')),web_frameworks=str(result.get('web_frameworks')),javascript_frameworks=str(result.get('js')), ports=str(result.get('port'))
-                                           , upgrade_time=datetime.datetime.now(), header=str(result.get('header')), body=str(result.get('body')))
+                                           , web_servers=str(result.get('web_server')), programming_languages=str(result.get('programming_languages')),web_frameworks=str(result.get('web_frameworks')),javascript_frameworks=str(result.get('js')), ports=str(result.get(
+                                    'port'))
+                                           , upgrade_time=datetime.datetime.now(),
+                                           header=pymysql.escape_string(str(result.get('header'))),
+                                           body=pymysql.escape_string(str(result.get('body'))))
                             db.session.add(asert)
                             db.session.commit()
                             number += 1

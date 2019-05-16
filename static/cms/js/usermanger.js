@@ -35,6 +35,7 @@ $(function () {
         // var sign = md5(timestamp+email+"q3423805gdflvbdfvhsdoa`#$%")
         zlajax.get({
             'url': '/email_captcha/',
+            'async': false,
             'data': {
                 'email': email,
                 // 'timestamp': timestamp,
@@ -99,6 +100,7 @@ $(function () {
 
         zlajax.post({
             'url': url,
+            'async': false,
             'data': {
                 'username': username,
                 'password': password,
@@ -145,6 +147,7 @@ $(function () {
             'confirmCallback': function () {
                 zlajax.post({
                         'url': '/iskey/',
+                        'async': false,
                         'data': {
                             'user_id': user_id,
                             'key': key

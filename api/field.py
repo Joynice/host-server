@@ -44,8 +44,6 @@ def result_parse(cms, web, host):
         result.update(cms=cmsname)
     if web:
         title = eval(web).get('title')
-        header = eval(web).get('header')
-        body = eval(web).get('body')
         web_result = eval(web).get('other')
         if web_result:
             print(web_result)
@@ -57,7 +55,7 @@ def result_parse(cms, web, host):
 
             js = web_result.get('javascript-frameworks')
             web_frameworks = web_result.get('web-frameworks')
-            result.update(web_server=web_server, programming_languages=programming_languages,title=title,js=js,web_frameworks=web_frameworks, header=header, body=body)
+            result.update(web_server=web_server, programming_languages=programming_languages,title=title,js=js,web_frameworks=web_frameworks)
     if host:
         host_result = eval(host)
         if len(host_result)>0:

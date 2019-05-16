@@ -1,32 +1,24 @@
 {% extends 'cms/cms_base.html' %}
 {% from 'common/_macros.html' import static %}
 {% block title %}
-    牧羊犬服务探测系统
+    观星资产总览
 {% endblock %}
 {% block head %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ static('cms/js/index.js') }}"></script>
-    <link rel="stylesheet" href="{{ static('cms/css/index.css') }}">
+    {% for jsfile_name in script_list %}
+        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+    {% endfor %}
 {% endblock %}
 {% block page_title %}
+    资产总览
 {% endblock %}
 {% block main %}
-    <div id="top-image">
-        <div id="content" class="container center-block">
-            <div class="jumbotron">
-                <div class="container">
-                    <h2 style="text-align: center; margin: 20px">资产搜索</h2>
-                    <div class="input-group input-group-lg"><span class="input-group-addon" id="sizing-addon1"><span
-                            class="glyphicon glyphicon-plus" aria-hidden="true"></span></span>
-                        <input type="text" class="form-control" placeholder="输入关键词" aria-describedby="sizing-addon1">
-                        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">搜 索</button>
-          </span></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="top-box" style="margin-bottom: 20px">
+        <span style="font-size: 16px">当前共收录：<font color="red">{{  total  }}</font> 条资产信息</span>
+        <button class="btn btn-warning btn-sm" id="gx">更新</button>
 
+    </div>
+    <div style="overflow-x: auto; overflow-y: auto; height: 750px; width:1520px;">
+        {{ chart|safe }}
+    </div>
 {% endblock %}

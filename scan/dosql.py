@@ -23,7 +23,6 @@ class Mysql(object):
     #查询数据
     def query(self, table='task', obj='*', factor=None, num='all', order=None):
         '''
-
         :param table: 表名
         :param obj: 查询对象（默认所有）
         :param factor: 条件（默认无）
@@ -41,7 +40,7 @@ class Mysql(object):
             else:
                 sql = "SELECT {} FROM {} WHERE {} ORDER BY {} DESC".format(obj, table, factor, order)
         try:
-            self.db.ping(reconnect=True)
+            print(sql)
             self.cursor.execute(sql)
             if num=='all':
                 res = self.cursor.fetchall()
@@ -70,9 +69,12 @@ class Mysql(object):
                 self.db.ping(reconnect=True)
                 self.cursor.execute(sql)
                 self.db.commit()
+                self.closedb()
+                return 1
             except:
                 self.db.rollback()
-
+                self.closedb()
+                return 0
 
     # 删除数据
     def delete(self, table='task', factor=None):
@@ -91,7 +93,7 @@ class Mysql(object):
             self.db.commit()
         except:
             self.db.rollback()
-
+        self.closedb()
 
     def sql(self, sql):
         if sql:
@@ -101,7 +103,9 @@ class Mysql(object):
                 self.db.commit()
             except Exception as e:
                 print(e)
+                print(sql)
                 self.db.rollback()
+            self.closedb()
 
     #关闭会话
     def closedb(self):
@@ -111,8 +115,3 @@ if __name__ == '__main__':
     mysql = Mysql()
     a = mysql.query(table='task', obj='state', factor='task_id="dz2UN5WxjwNBABGnmAm9nk"', num='one')
     print(a)
-
-
-
-
-

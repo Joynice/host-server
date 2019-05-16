@@ -6,6 +6,7 @@ from exts import db, socketio
 from api.resource import HostServer, Result
 # from  flask_wtf import CsrfProtect
 from apps.cms import bp as cms_bp
+from apps.front import bp as front_bp
 import datetime
 from apps.common import bp as common_bp
 
@@ -14,9 +15,10 @@ def create_app():
     app.config.from_object(config.config['development'])
     app.register_blueprint(cms_bp)
     app.register_blueprint(common_bp)
+    app.register_blueprint(front_bp)
     config.config['development'].init_app(app)
     db.init_app(app)
-    app.permanent_session_lifetime = datetime.timedelta(seconds=60 * 60 * 6)
+    app.permanent_session_lifetime = datetime.timedelta(seconds=60 * 60 * 6) #设置session时间
     socketio.init_app(app)
     # CsrfProtect(app)
     return app

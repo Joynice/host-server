@@ -22,7 +22,8 @@ class Nmap(object):
         self.resultpath = 'D:\\events\\host-server\\scan\\hostscan\\tools\\result\\{}.xml'.format(taskid)
         if os.path.exists(path):
             print(self.domain)
-            cmd = "%s %s -sV -O --osscan-guess -oX %s" % (path, self.domain, self.resultpath)
+            cmd = "%s %s -Pn -sV -O --osscan-guess -oX %s" % (path, self.domain, self.resultpath)
+            print(cmd)
             a = subprocess.Popen(cmd, stdout=subprocess.PIPE)
             result = a.communicate()[0]
             try:
@@ -78,4 +79,4 @@ def host_scan(url, taskid):
 
 
 if __name__ == '__main__':
-    nmap = Nmap(url='https://www.jianshu.com').run(taskid='uxNPjki6QzMJTcbcVJKv2n')
+    nmap = Nmap(url='http://szjy.xxu.edu.cn/').run(taskid='uxNPjki6QzMJTcbcVJKv2n')

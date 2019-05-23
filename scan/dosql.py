@@ -69,9 +69,12 @@ class Mysql(object):
                 self.db.ping(reconnect=True)
                 self.cursor.execute(sql)
                 self.db.commit()
+                self.cursor.close()
                 self.closedb()
                 return 1
-            except:
+            except Exception as e:
+                print(e)
+                self.db.ping(reconnect=True)
                 self.db.rollback()
                 self.closedb()
                 return 0

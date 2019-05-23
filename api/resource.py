@@ -58,6 +58,8 @@ class HostServer(Resource):
                     return field.unauth_error(message='该用户已经被禁用，请联系超级管理员解决！')
                 if user.is_api == 'ApiEnum.DOWN':
                     return field.unauth_error(message='该用户已经被禁用API，请联系超级管理员解决！')
+                if not unabletouch(url=url):
+                    return field.params_error(message='该URL不可达！')
                 if url and cycle and number:
                     task = Task(url=url, cycle=str(cycle), number=number, user_id=user.id, referer='API')
                     db.session.add(task)
@@ -69,15 +71,10 @@ class HostServer(Resource):
                     task_id = task.task_id
                     result_id = task.result_id
                     if number == 1:
-                        if unabletouch(url=url):
-                            task.state = 'State.ING_SCAN'
-                            web_scan.delay(url=url, taskid=task_id)
-                            host_scan.delay(url=url, taskid=task_id)
-                            return field.success(message='下发任务成功，结果请稍后查询', data={'task_id': task_id, 'result_id': result_id})
-                        else:
-                            db.session.delete(task)
-                            db.session.commit()
-                            return field.params_error(message='该URL不可达！')
+                        task.state = 'State.ING_SCAN'
+                        web_scan.delay(url=url, taskid=task_id)
+                        host_scan.delay(url=url, taskid=task_id)
+                        return field.success(message='下发任务成功，结果请稍后查询', data={'task_id': task_id, 'result_id': result_id})
                 else:
                     return field.params_error(message='参数缺失')
             else:

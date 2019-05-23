@@ -26,16 +26,16 @@ class IndexView(views.MethodView):
                 asert = Asset.query.filter(Asset.url.contains(urlTodomain(search))).all()
             elif search.lower().startswith('title='):
                 context = re.search(r"title=\"(.*?)\"", search, re.I).groups()[0]
-                asert = Asset.query.filter(Asset.title.contains(context)).all()
+                asert = Asset.query.filter(Asset.title.contains(context)).order_by(Asset.upgrade_time).all()
             elif search.lower().startswith('server='):
                 context = re.search(r"server=\"(.*?)\"", search, re.I).groups()[0]
-                asert = Asset.query.filter(func.lower(Asset.web_servers).contains(func.lower(context))).all()
+                asert = Asset.query.filter(func.lower(Asset.web_servers).contains(func.lower(context))).order_by(Asset.upgrade_time).all()
             elif search.lower().startswith('os'):
                 context = re.search(r"os=\"(.*?)\"", search, re.I).groups()[0]
-                asert = Asset.query.filter(func.lower(Asset.operating_systems).contains(func.lower(context))).all()
+                asert = Asset.query.filter(func.lower(Asset.operating_systems).contains(func.lower(context))).order_by(Asset.upgrade_time).all()
             elif search.lower().startswith('ip'):
                 context = re.search(r"ip=\"(.*?)\"", search, re.I).groups()[0]
-                asert = Asset.query.filter_by(ip=context).all()
+                asert = Asset.query.filter_by(ip=context).order_by(Asset.upgrade_time).all()
             else:
                 return field.params_error(message='不支持查询类型！')
             if asert:

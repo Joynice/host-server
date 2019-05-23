@@ -30,7 +30,7 @@ class Nmap(object):
                 self.os = re.findall('\\r\\nService Info: (.*?)\\r\\n\\r\\nOS', str(result, encoding='gbk'), re.I)[0]
             except:
                 self.os = ''
-
+        print(self.os)
     def parse(self):
         try:
             open_ports = []
@@ -41,6 +41,7 @@ class Nmap(object):
             if self.os=='':
                 os_purpose = document_tree.getElementsByTagName('osmatch')[0].getAttribute('name') or ''
                 self.os = os_purpose
+            print(self.os)
             for port in ports:
                 port_dict = {}
                 data_dict = {}
@@ -79,4 +80,4 @@ def host_scan(url, taskid):
 
 
 if __name__ == '__main__':
-    nmap = Nmap(url='http://szjy.xxu.edu.cn/').run(taskid='uxNPjki6QzMJTcbcVJKv2n')
+    nmap = Nmap(url='http://jcb.smxpt.cn/').run(taskid='vna3RMcSyGZWjHWPGiXK3D')

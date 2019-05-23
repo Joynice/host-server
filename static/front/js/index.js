@@ -290,6 +290,19 @@ $(function () {
   })
 });
 
+function setHeightKeyWord(keyword) {
+    /* 获取需要处理的关键字 */
+    var tempHTML = $("#result-dialog").html();
+    /* 关键字替换文本 该文本设置有高亮颜色 */
+    var replaceText = "<font style='color:red;'>$1</font>";
+    /* 关键字正则匹配规则 */
+    var r = new RegExp("(" + keyword + ")", "ig");
+    /* 将匹配到的关键字替换成我们预设的文本 */
+    tempHTML = tempHTML.replace(r, replaceText);
+    /* 将文本显示到浏览器上 */
+    $("#result-dialog").html(tempHTML);
+}
+
 $(function () {
   $("#search").click(function (event) {
     event.preventDefault();
@@ -300,6 +313,9 @@ $(function () {
       zlalert.alertInfoToast('请输入查询内容!');
       return;
     }
+    var reg=new RegExp('.*[\"]+(.*)[\"]+.*');
+    var search_data = data.replace(reg,"$1");
+    console.log(search_data);
     zlajax.post({
       'url': '/',
       'data': {
@@ -311,8 +327,9 @@ $(function () {
           var html = "";
           for (var i=0; i<result.length; i++) {
             zlalert.alertSuccessToast('查询成功!');
+            var url = result[i]['url'];
             html += "<ul class='list-group'>";
-            html += "<h4>" + result[i]['url'] + "</h4>";
+            html += "<h4>" +"<a href="+url+" target='_blank'>"+ url + "</a>"+ "</h4>";
             html += "<li class='list-group-item'>" + 'IP： ' +result[i]['ip'] + "</li>";
             html += "<li class='list-group-item'>" + '标题： '+ result[i]['title'] + "</li>";
             html += "<li class='list-group-item'>" + 'Web服务器： '+result[i]['web_server'] + "</li>";
@@ -326,6 +343,7 @@ $(function () {
           }
           $("#result-body").html(html);
           dialog.modal('show');
+          setHeightKeyWord(search_data);
         } else {
           zlalert.alertInfoToast(data['message']);
         }
@@ -350,3 +368,4 @@ $(function () {
         $(this).css({"filter":"alpha(Opacity=30)","-moz-opacity":0.3,"opacity":0.3})
    })
 });
+

@@ -113,7 +113,7 @@ def index():
     os_pie = webos()  # 操作系统
     pl_pie = pl()  # 开发语言
     jsf_pie = jsf()  # js框架
-    cms_pie = cms()
+    cms_pie = cms() #cms
     page.add([webserver_pie, os_pie, pl_pie, jsf_pie, cms_pie])
     return render_template('cms/cms_index.html', chart=page.render_embed(), host='/static/front/js', total=asset_count,
                            script_list=page.get_js_dependencies())

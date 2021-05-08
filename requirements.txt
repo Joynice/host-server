@@ -20,7 +20,7 @@ dnspython==1.16.0
 dominate==2.3.5
 dukpy==0.2.2
 et-xmlfile==1.0.1
-eventlet==0.24.1
+eventlet==0.31.0
 Flask==0.10.1
 Flask-Bootstrap==3.3.5.7
 Flask-Login==0.3.2

@@ -33,7 +33,7 @@ Flask-Script==2.0.5
 Flask-SocketIO==3.3.2
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
-flower==0.9.3
+flower==1.2.0
 ForgeryPy==0.1
 future==0.17.1
 gevent==1.4.0

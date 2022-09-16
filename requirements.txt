@@ -51,7 +51,7 @@ lib==3.0.0
 lml==0.0.2
 lxml==4.3.2
 macropy3==1.1.0b2
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==0.23
 monotonic==1.5
 msgpack-python==0.5.6
